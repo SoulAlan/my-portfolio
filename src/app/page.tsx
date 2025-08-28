@@ -3,6 +3,36 @@
 import React, { useState, useEffect } from 'react';
 import { Github, Linkedin, Mail, Code, Server, Users, Briefcase, ChevronDown, ExternalLink, Sun, Moon, MapPin, Calendar, Clock, Thermometer, Wind, Eye, Activity, ChevronLeft, ChevronRight, Languages, Sparkles } from 'lucide-react';
 
+// Agregar estas interfaces de tipo
+interface WeatherData {
+  name: string;
+  main: {
+    temp: number;
+    feels_like: number;
+    humidity: number;
+  };
+  weather: {
+    main: string;
+    description: string;
+    icon: string;
+  }[];
+  wind: {
+    speed: number;
+  };
+  visibility: number;
+}
+
+interface CryptoData {
+  bitcoin: {
+    usd: number;
+    usd_24h_change: number;
+  };
+  ripple: {
+    usd: number;
+    usd_24h_change: number;
+  };
+}
+
 const Portfolio = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState({});
