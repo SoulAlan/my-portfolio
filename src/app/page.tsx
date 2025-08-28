@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { Github, Linkedin, Mail, Code, Server, Users, Briefcase, ChevronDown, ExternalLink, Sun, Moon, MapPin, Calendar, Clock, Thermometer, Wind, Eye, Activity, ChevronLeft, ChevronRight, Languages, Sparkles } from 'lucide-react';
 
-// Agregar estas interfaces de tipo
 interface WeatherData {
   name: string;
   main: {
@@ -33,6 +32,8 @@ interface CryptoData {
   };
 }
 
+type Language = 'es' | 'en';
+
 const Portfolio = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState({});
@@ -45,7 +46,7 @@ const Portfolio = () => {
   const [isGuatemala, setIsGuatemala] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isApiPanelOpen, setIsApiPanelOpen] = useState(false);
-  const [language, setLanguage] = useState('es');
+const [language, setLanguage] = useState<Language>('es');
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -127,8 +128,42 @@ const Portfolio = () => {
     setLanguage(language === 'es' ? 'en' : 'es');
   };
 
-  // Contenido multiidioma
-  const content = {
+// Contenido multiidioma
+const content: Record<Language, {
+    title: string;
+    about: string;
+    aboutText1: string;
+    aboutText2: string;
+    aboutText3: string;
+    skills: string;
+    experience: string;
+    projects: string;
+    contact: string;
+    contactText: string;
+    viewCode: string;
+    connect: string;
+    myHour: string;
+    yourHour: string;
+    ourHour: string;
+    fullStack: string;
+    infrastructure: string;
+    projectManagement: string;
+    technicalLeadership: string;
+    projectTitles: {
+      businessManagement: string;
+      quotationPlatform: string;
+      digitalSignatures: string;
+      reactApps: string;
+      interactivePortfolio: string;
+    };
+    projectDescriptions: {
+      businessManagement: string;
+      quotationPlatform: string;
+      digitalSignatures: string;
+      reactApps: string;
+      interactivePortfolio: string;
+    };
+  }> = {
     es: {
       title: "Desarrollador Full Stack & Technology Project Manager con más de 8 años transformando ideas en soluciones digitales robustas",
       about: "Sobre Mí",
@@ -149,20 +184,20 @@ const Portfolio = () => {
       infrastructure: "Infraestructura & DevOps",
       projectManagement: "Gestión de Proyectos",
       technicalLeadership: "Liderazgo Técnico",
-       projectTitles: {
-      businessManagement: "Sistema de Gestión Empresarial",
-      quotationPlatform: "Plataforma de Cotizaciones", 
-      digitalSignatures: "Sistema de Firmas Digitales",
-      reactApps: "Aplicaciones React",
-      interactivePortfolio: "Portafolio Interactivo"
-    },
-    projectDescriptions: {
-      businessManagement: "Desarrollo de sistema completo de administración con integración a APIs externas, generación de reportes y gestión de usuarios.",
-      quotationPlatform: "Sistema conectado a APIs de SAP para obtener productos, costos y generar cotizaciones en PDF de forma automatizada.",
-      digitalSignatures: "Herramienta que obtiene datos de colaboradores vía API y genera firmas personalizadas para integración con Outlook.",
-      reactApps: "Desarrollo y modificación de aplicaciones para gestión de espacios, ordenamiento de parqueos y reservas de oficina.",
-      interactivePortfolio: "Desarrollo de este portafolio con integración de APIs en tiempo real, modo oscuro/claro y efectos avanzados de UI/UX."
-    }
+      projectTitles: {
+        businessManagement: "Sistema de Gestión Empresarial",
+        quotationPlatform: "Plataforma de Cotizaciones", 
+        digitalSignatures: "Sistema de Firmas Digitales",
+        reactApps: "Aplicaciones React",
+        interactivePortfolio: "Portafolio Interactivo"
+      },
+      projectDescriptions: {
+        businessManagement: "Desarrollo de sistema completo de administración con integración a APIs externas, generación de reportes y gestión de usuarios.",
+        quotationPlatform: "Sistema conectado a APIs de SAP para obtener productos, costos y generar cotizaciones en PDF de forma automatizada.",
+        digitalSignatures: "Herramienta que obtiene datos de colaboradores vía API y genera firmas personalizadas para integración con Outlook.",
+        reactApps: "Desarrollo y modificación de aplicaciones para gestión de espacios, ordenamiento de parqueos y reservas de oficina.",
+        interactivePortfolio: "Desarrollo de este portafolio con integración de APIs en tiempo real, modo oscuro/claro y efectos avanzados de UI/UX."
+      }
     },
     en: {
       title: "Full Stack Developer & Technology Project Manager with 8+ years transforming ideas into robust digital solutions",
@@ -185,19 +220,19 @@ const Portfolio = () => {
       projectManagement: "Project Management",
       technicalLeadership: "Technical Leadership",
       projectTitles: {
-      businessManagement: "Business Management System",
-      quotationPlatform: "Quotation Platform",
-      digitalSignatures: "Digital Signatures System", 
-      reactApps: "React Applications",
-      interactivePortfolio: "Interactive Portfolio"
-    },
-    projectDescriptions: {
-      businessManagement: "Development of complete administration system with external API integration, report generation and user management.",
-      quotationPlatform: "System connected to SAP APIs to obtain products, costs and generate automated PDF quotations.",
-      digitalSignatures: "Tool that obtains employee data via API and generates personalized signatures for Outlook integration.",
-      reactApps: "Development and modification of applications for space management, parking ordering and office reservations.",
-      interactivePortfolio: "Development of this portfolio with real-time API integration, dark/light mode and advanced UI/UX effects."
-    }
+        businessManagement: "Business Management System",
+        quotationPlatform: "Quotation Platform",
+        digitalSignatures: "Digital Signatures System", 
+        reactApps: "React Applications",
+        interactivePortfolio: "Interactive Portfolio"
+      },
+      projectDescriptions: {
+        businessManagement: "Development of complete administration system with external API integration, report generation and user management.",
+        quotationPlatform: "System connected to SAP APIs to obtain products, costs and generate automated PDF quotations.",
+        digitalSignatures: "Tool that obtains employee data via API and generates personalized signatures for Outlook integration.",
+        reactApps: "Development and modification of applications for space management, parking ordering and office reservations.",
+        interactivePortfolio: "Development of this portfolio with real-time API integration, dark/light mode and advanced UI/UX effects."
+      }
     }
   };
 
