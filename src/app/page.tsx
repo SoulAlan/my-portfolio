@@ -37,8 +37,8 @@ const Portfolio = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState({});
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const [weatherData, setWeatherData] = useState(null);
-  const [cryptoData, setCryptoData] = useState(null);
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [cryptoData, setCryptoData] = useState<CryptoData | null>(null);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [userTime, setUserTime] = useState(new Date());
   const [userTimezone, setUserTimezone] = useState('');
@@ -49,8 +49,8 @@ const Portfolio = () => {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-  setMousePosition({ x: e.clientX, y: e.clientY });
-};
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
