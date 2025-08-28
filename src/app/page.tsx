@@ -18,9 +18,9 @@ const Portfolio = () => {
   const [language, setLanguage] = useState('es');
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
+    const handleMouseMove = (e: MouseEvent) => {
+  setMousePosition({ x: e.clientX, y: e.clientY });
+};
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
