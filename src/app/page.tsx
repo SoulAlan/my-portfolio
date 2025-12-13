@@ -47,6 +47,9 @@ const Portfolio = () => {
   const [loading, setLoading] = useState(false);
   const [isApiPanelOpen, setIsApiPanelOpen] = useState(false);
 const [language, setLanguage] = useState<Language>('es');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const [countdown, setCountdown] = useState(5);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -128,6 +131,31 @@ const [language, setLanguage] = useState<Language>('es');
     setLanguage(language === 'es' ? 'en' : 'es');
   };
 
+  const openModal = (projectKey: string) => {
+    setSelectedProject(projectKey);
+    setIsModalOpen(true);
+    setCountdown(5);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+    setCountdown(5);
+  };
+
+  // Contador regresivo para redirigir
+  useEffect(() => {
+    if (isModalOpen && countdown > 0) {
+      const timer = setTimeout(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+      return () => clearTimeout(timer);
+    } else if (isModalOpen && countdown === 0) {
+      window.open('https://albacinema.com.gt/', '_blank');
+      closeModal();
+    }
+  }, [isModalOpen, countdown]);
+
 // Contenido multiidioma
 const content: Record<Language, {
     title: string;
@@ -155,6 +183,7 @@ const content: Record<Language, {
       digitalSignatures: string;
       reactApps: string;
       interactivePortfolio: string;
+      cinemaManagement: string;
     };
     projectDescriptions: {
       businessManagement: string;
@@ -162,7 +191,15 @@ const content: Record<Language, {
       digitalSignatures: string;
       reactApps: string;
       interactivePortfolio: string;
+      cinemaManagement: string;
     };
+    modalParticipation: string;
+    modalDetails: {
+      cinemaManagement: string[];
+    };
+    visitSite: string;
+    closeModal: string;
+    redirectingIn: string;
   }> = {
     es: {
       title: "Desarrollador Full Stack & Technology Project Manager con más de 8 años transformando ideas en soluciones digitales robustas",
@@ -186,18 +223,32 @@ const content: Record<Language, {
       technicalLeadership: "Liderazgo Técnico",
       projectTitles: {
         businessManagement: "Sistema de Gestión Empresarial",
-        quotationPlatform: "Plataforma de Cotizaciones", 
+        quotationPlatform: "Plataforma de Cotizaciones",
         digitalSignatures: "Sistema de Firmas Digitales",
         reactApps: "Aplicaciones React",
-        interactivePortfolio: "Portafolio Interactivo"
+        interactivePortfolio: "Portafolio Interactivo",
+        cinemaManagement: "Sistema de Gestión de Cine"
       },
       projectDescriptions: {
         businessManagement: "Desarrollo de sistema completo de administración con integración a APIs externas, generación de reportes y gestión de usuarios.",
         quotationPlatform: "Sistema conectado a APIs de SAP para obtener productos, costos y generar cotizaciones en PDF de forma automatizada.",
         digitalSignatures: "Herramienta que obtiene datos de colaboradores vía API y genera firmas personalizadas para integración con Outlook.",
         reactApps: "Desarrollo y modificación de aplicaciones para gestión de espacios, ordenamiento de parqueos y reservas de oficina.",
-        interactivePortfolio: "Desarrollo de este portafolio con integración de APIs en tiempo real, modo oscuro/claro y efectos avanzados de UI/UX."
-      }
+        interactivePortfolio: "Desarrollo de este portafolio con integración de APIs en tiempo real, modo oscuro/claro y efectos avanzados de UI/UX.",
+        cinemaManagement: "Sistema de gestión y venta de butacas para cadena de cines nacional. Incluye mejoras en carrousel, filtros de selección y boletería por QR."
+      },
+      modalParticipation: "Mi Participación",
+      modalDetails: {
+        cinemaManagement: [
+          "Solucionar problemas en el carrusel principal",
+          "Agregar filtros especializados en la selección de butaca y los horarios de compra",
+          "Implementar el sistema de boletería por QR de manera eficiente",
+          "Mitigar errores de conexión con puntos de pago"
+        ]
+      },
+      visitSite: "Visitar sitio web",
+      closeModal: "Cerrar",
+      redirectingIn: "Redirigiendo en"
     },
     en: {
       title: "Full Stack Developer & Technology Project Manager with 8+ years transforming ideas into robust digital solutions",
@@ -222,17 +273,31 @@ const content: Record<Language, {
       projectTitles: {
         businessManagement: "Business Management System",
         quotationPlatform: "Quotation Platform",
-        digitalSignatures: "Digital Signatures System", 
+        digitalSignatures: "Digital Signatures System",
         reactApps: "React Applications",
-        interactivePortfolio: "Interactive Portfolio"
+        interactivePortfolio: "Interactive Portfolio",
+        cinemaManagement: "Cinema Management System"
       },
       projectDescriptions: {
         businessManagement: "Development of complete administration system with external API integration, report generation and user management.",
         quotationPlatform: "System connected to SAP APIs to obtain products, costs and generate automated PDF quotations.",
         digitalSignatures: "Tool that obtains employee data via API and generates personalized signatures for Outlook integration.",
         reactApps: "Development and modification of applications for space management, parking ordering and office reservations.",
-        interactivePortfolio: "Development of this portfolio with real-time API integration, dark/light mode and advanced UI/UX effects."
-      }
+        interactivePortfolio: "Development of this portfolio with real-time API integration, dark/light mode and advanced UI/UX effects.",
+        cinemaManagement: "Seat management and sales system for a national cinema chain. Includes carousel improvements, selection filters and QR ticketing."
+      },
+      modalParticipation: "My Participation",
+      modalDetails: {
+        cinemaManagement: [
+          "Fix issues in the main carousel",
+          "Add specialized filters for seat selection and purchase schedules",
+          "Implement efficient QR ticketing system",
+          "Mitigate connection errors with payment points"
+        ]
+      },
+      visitSite: "Visit website",
+      closeModal: "Close",
+      redirectingIn: "Redirecting in"
     }
   };
 
@@ -289,6 +354,13 @@ const content: Record<Language, {
  title: content[language].projectTitles.interactivePortfolio,
     description: content[language].projectDescriptions.interactivePortfolio,
       tech: ["Next.js", "React", "Tailwind CSS", "APIs", "Real-time Data"]
+    },
+    {
+      title: content[language].projectTitles.cinemaManagement,
+      description: content[language].projectDescriptions.cinemaManagement,
+      tech: ["PHP", "JavaScript", "CSS", "QR Integration"],
+      link: "https://albacinema.com.gt/",
+      hasModal: true
     }
   ];
 
@@ -665,11 +737,15 @@ const content: Record<Language, {
           <h2 className="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent">{content[language].projects}</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {projects.map((project, index) => (
-              <div key={index} className={`p-6 rounded-lg transition-all duration-300 group border hover:scale-105 ${
-                isDarkMode 
-                  ? 'bg-gray-800 hover:bg-gray-700 border-orange-500/20 hover:border-orange-500/40' 
-                  : 'bg-white hover:bg-gray-50 border-orange-500/30 hover:border-orange-500/60 shadow-lg hover:shadow-xl'
-              }`}>
+              <div
+                key={index}
+                className={`p-6 rounded-lg transition-all duration-300 group border hover:scale-105 ${
+                  isDarkMode
+                    ? 'bg-gray-800 hover:bg-gray-700 border-orange-500/20 hover:border-orange-500/40'
+                    : 'bg-white hover:bg-gray-50 border-orange-500/30 hover:border-orange-500/60 shadow-lg hover:shadow-xl'
+                } ${project.hasModal ? 'cursor-pointer' : ''}`}
+                onClick={() => project.hasModal && openModal('cinemaManagement')}
+              >
                 <h3 className="text-xl font-semibold mb-3 text-orange-400 group-hover:text-orange-300">
                   {project.title}
                 </h3>
@@ -722,6 +798,78 @@ const content: Record<Language, {
           </div>
         </div>
       </section>
+
+      {/* Modal de Participación */}
+      {isModalOpen && selectedProject && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Overlay */}
+          <div
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            onClick={closeModal}
+          />
+
+          {/* Modal Content */}
+          <div className={`relative max-w-2xl w-full rounded-xl shadow-2xl overflow-hidden ${
+            isDarkMode ? 'bg-gray-800' : 'bg-white'
+          }`}>
+            {/* Header */}
+            <div className="bg-gradient-to-r from-orange-500 to-red-500 p-6">
+              <h3 className="text-2xl font-bold text-white">
+                {content[language].projectTitles[selectedProject as keyof typeof content[typeof language]['projectTitles']]}
+              </h3>
+            </div>
+
+            {/* Body */}
+            <div className="p-6">
+              <h4 className="text-xl font-semibold mb-4 text-orange-400">
+                {content[language].modalParticipation}
+              </h4>
+              <ul className="space-y-3 mb-6">
+                {content[language].modalDetails[selectedProject as keyof typeof content[typeof language]['modalDetails']].map((detail, index) => (
+                  <li key={index} className={`flex items-start gap-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                    <span className="text-orange-500 mt-1">✓</span>
+                    <span>{detail}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Contador regresivo */}
+              <div className="text-center p-4 rounded-lg bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/30">
+                <p className={`mb-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                  {content[language].redirectingIn}
+                </p>
+                <div className="text-4xl font-bold text-orange-500 animate-pulse">
+                  {countdown}
+                </div>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="p-6 border-t border-gray-700 flex gap-4">
+              <button
+                onClick={closeModal}
+                className={`flex-1 px-6 py-3 rounded-lg transition-all duration-300 ${
+                  isDarkMode
+                    ? 'bg-gray-700 hover:bg-gray-600 text-white'
+                    : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
+                }`}
+              >
+                {content[language].closeModal}
+              </button>
+              <button
+                onClick={() => {
+                  window.open('https://albacinema.com.gt/', '_blank');
+                  closeModal();
+                }}
+                className="flex-1 px-6 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                {content[language].visitSite}
+                <ExternalLink size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className={`py-8 px-4 border-t relative z-20 ${
