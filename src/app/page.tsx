@@ -194,12 +194,20 @@ const content: Record<Language, {
       cinemaManagement: string;
     };
     modalParticipation: string;
+    modalChallenge: string;
     modalDetails: {
+      businessManagement: string[];
+      quotationPlatform: string[];
+      digitalSignatures: string[];
       cinemaManagement: string[];
+    };
+    modalImages?: {
+      quotationPlatform: string[];
     };
     visitSite: string;
     closeModal: string;
     redirectingIn: string;
+    privateProject: string;
   }> = {
     es: {
       title: "Desarrollador Full Stack & Technology Project Manager con más de 8 años transformando ideas en soluciones digitales robustas",
@@ -238,7 +246,34 @@ const content: Record<Language, {
         cinemaManagement: "Sistema de gestión y venta de butacas para cadena de cines nacional. Incluye mejoras en carrousel, filtros de selección y boletería por QR."
       },
       modalParticipation: "Mi Participación",
+      modalChallenge: "El Reto",
       modalDetails: {
+        businessManagement: [
+          "Heredar código sin documentación de un desarrollador previo",
+          "Solucionar errores críticos en sistema de producción bajo presión de tiempo",
+          "Corregir problemas que afectaban la atención a clientes",
+          "Optimizar la gestión interna de la empresa a través de la plataforma web",
+          "Implementar mejoras de seguridad y rendimiento",
+          "Crear documentación técnica del sistema para futuro mantenimiento"
+        ],
+        quotationPlatform: [
+          "Integración completa con APIs de SAP Business One",
+          "Implementación de métodos para generación automática de cotizaciones",
+          "Conexión en tiempo real con productos internos, clientes y precios",
+          "Desarrollo de sistema de generación de PDFs personalizados",
+          "Optimización de consultas para mejorar tiempos de respuesta",
+          "Implementación de caché para datos frecuentemente consultados"
+        ],
+        digitalSignatures: [
+          "Desarrollo desde cero del sistema completo",
+          "Acceso y configuración vía SSH al servidor Azure del cliente",
+          "Creación de endpoints personalizados para integración",
+          "Conexión directa con base de datos del cliente",
+          "Generación de firmas con colores específicos para cada sub-empresa",
+          "Sistema compatible con múltiples empresas de la multinacional",
+          "Exportación fácil y compatible con Outlook",
+          "Firmas interactivas y personalizadas para cada colaborador"
+        ],
         cinemaManagement: [
           "Solucionar problemas en el carrusel principal",
           "Agregar filtros especializados en la selección de butaca y los horarios de compra",
@@ -246,9 +281,13 @@ const content: Record<Language, {
           "Mitigar errores de conexión con puntos de pago"
         ]
       },
+      modalImages: {
+        quotationPlatform: ["/multi_coti.png", "/Multi_dash.png"]
+      },
       visitSite: "Visitar sitio web",
       closeModal: "Cerrar",
-      redirectingIn: "Redirigiendo en"
+      redirectingIn: "Redirigiendo en",
+      privateProject: "Proyecto Privado"
     },
     en: {
       title: "Full Stack Developer & Technology Project Manager with 8+ years transforming ideas into robust digital solutions",
@@ -287,7 +326,34 @@ const content: Record<Language, {
         cinemaManagement: "Seat management and sales system for a national cinema chain. Includes carousel improvements, selection filters and QR ticketing."
       },
       modalParticipation: "My Participation",
+      modalChallenge: "The Challenge",
       modalDetails: {
+        businessManagement: [
+          "Inherit undocumented code from previous developer",
+          "Fix critical errors in production system under time pressure",
+          "Correct issues affecting customer service",
+          "Optimize internal company management through web platform",
+          "Implement security and performance improvements",
+          "Create technical documentation for future maintenance"
+        ],
+        quotationPlatform: [
+          "Complete integration with SAP Business One APIs",
+          "Implementation of methods for automatic quotation generation",
+          "Real-time connection with internal products, customers and prices",
+          "Development of customized PDF generation system",
+          "Query optimization to improve response times",
+          "Cache implementation for frequently consulted data"
+        ],
+        digitalSignatures: [
+          "Complete system development from scratch",
+          "SSH access and configuration to client's Azure server",
+          "Creation of custom endpoints for integration",
+          "Direct connection with client database",
+          "Generation of signatures with specific colors for each sub-company",
+          "System compatible with multiple companies of the multinational",
+          "Easy export compatible with Outlook",
+          "Interactive and personalized signatures for each employee"
+        ],
         cinemaManagement: [
           "Fix issues in the main carousel",
           "Add specialized filters for seat selection and purchase schedules",
@@ -295,9 +361,13 @@ const content: Record<Language, {
           "Mitigate connection errors with payment points"
         ]
       },
+      modalImages: {
+        quotationPlatform: ["/multi_coti.png", "/Multi_dash.png"]
+      },
       visitSite: "Visit website",
       closeModal: "Close",
-      redirectingIn: "Redirecting in"
+      redirectingIn: "Redirecting in",
+      privateProject: "Private Project"
     }
   };
 
@@ -330,29 +400,37 @@ const content: Record<Language, {
   ];
 
   const projects = [
- {
-    title: content[language].projectTitles.businessManagement,
-    description: content[language].projectDescriptions.businessManagement,
-    tech: ["PHP", "JavaScript", "CSS", "API Integration"]
-  },
-  {
-    title: content[language].projectTitles.quotationPlatform,
-    description: content[language].projectDescriptions.quotationPlatform,
-    tech: ["PHP", "JavaScript", "SAP API", "PDF Generation"]
-  },
     {
-       title: content[language].projectTitles.digitalSignatures,
-    description: content[language].projectDescriptions.digitalSignatures,
-      tech: ["JavaScript", "PHP", "CSS", "API Integration"]
+      title: content[language].projectTitles.businessManagement,
+      description: content[language].projectDescriptions.businessManagement,
+      tech: ["PHP", "JavaScript", "CSS", "API Integration"],
+      hasModal: true,
+      projectKey: 'businessManagement',
+      isPrivate: true
     },
     {
- title: content[language].projectTitles.reactApps,
-    description: content[language].projectDescriptions.reactApps,
+      title: content[language].projectTitles.quotationPlatform,
+      description: content[language].projectDescriptions.quotationPlatform,
+      tech: ["PHP", "JavaScript", "SAP API", "PDF Generation"],
+      hasModal: true,
+      projectKey: 'quotationPlatform',
+      hasImages: true
+    },
+    {
+      title: content[language].projectTitles.digitalSignatures,
+      description: content[language].projectDescriptions.digitalSignatures,
+      tech: ["JavaScript", "PHP", "CSS", "API Integration"],
+      hasModal: true,
+      projectKey: 'digitalSignatures'
+    },
+    {
+      title: content[language].projectTitles.reactApps,
+      description: content[language].projectDescriptions.reactApps,
       tech: ["React", "JavaScript", "CSS"]
     },
     {
- title: content[language].projectTitles.interactivePortfolio,
-    description: content[language].projectDescriptions.interactivePortfolio,
+      title: content[language].projectTitles.interactivePortfolio,
+      description: content[language].projectDescriptions.interactivePortfolio,
       tech: ["Next.js", "React", "Tailwind CSS", "APIs", "Real-time Data"]
     },
     {
@@ -360,7 +438,8 @@ const content: Record<Language, {
       description: content[language].projectDescriptions.cinemaManagement,
       tech: ["PHP", "JavaScript", "CSS", "QR Integration"],
       link: "https://albacinema.com.gt/",
-      hasModal: true
+      hasModal: true,
+      projectKey: 'cinemaManagement'
     }
   ];
 
@@ -744,7 +823,7 @@ const content: Record<Language, {
                     ? 'bg-gray-800 hover:bg-gray-700 border-orange-500/20 hover:border-orange-500/40'
                     : 'bg-white hover:bg-gray-50 border-orange-500/30 hover:border-orange-500/60 shadow-lg hover:shadow-xl'
                 } ${project.hasModal ? 'cursor-pointer' : ''}`}
-                onClick={() => project.hasModal && openModal('cinemaManagement')}
+                onClick={() => project.hasModal && project.projectKey && openModal(project.projectKey)}
               >
                 <h3 className="text-xl font-semibold mb-3 text-orange-400 group-hover:text-orange-300">
                   {project.title}
@@ -809,7 +888,7 @@ const content: Record<Language, {
           />
 
           {/* Modal Content */}
-          <div className={`relative max-w-2xl w-full rounded-xl shadow-2xl overflow-hidden ${
+          <div className={`relative max-w-3xl w-full rounded-xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto ${
             isDarkMode ? 'bg-gray-800' : 'bg-white'
           }`}>
             {/* Header */}
@@ -817,6 +896,11 @@ const content: Record<Language, {
               <h3 className="text-2xl font-bold text-white">
                 {content[language].projectTitles[selectedProject as keyof typeof content[typeof language]['projectTitles']]}
               </h3>
+              {projects.find(p => p.projectKey === selectedProject)?.isPrivate && (
+                <span className="inline-block mt-2 px-3 py-1 bg-white/20 rounded-full text-sm">
+                  {content[language].privateProject}
+                </span>
+              )}
             </div>
 
             {/* Body */}
@@ -833,19 +917,40 @@ const content: Record<Language, {
                 ))}
               </ul>
 
-              {/* Contador regresivo */}
-              <div className="text-center p-4 rounded-lg bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/30">
-                <p className={`mb-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                  {content[language].redirectingIn}
-                </p>
-                <div className="text-4xl font-bold text-orange-500 animate-pulse">
-                  {countdown}
+              {/* Imágenes del proyecto (si existen) */}
+              {selectedProject === 'quotationPlatform' && content[language].modalImages?.quotationPlatform && (
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold mb-3 text-orange-400">
+                    {language === 'es' ? 'Capturas del Proyecto' : 'Project Screenshots'}
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {content[language].modalImages.quotationPlatform.map((img: string, index: number) => (
+                      <img
+                        key={index}
+                        src={img}
+                        alt={`Captura ${index + 1}`}
+                        className="rounded-lg border border-orange-500/30 hover:border-orange-500/60 transition-all duration-300 hover:scale-105"
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {/* Contador regresivo solo para proyectos con link */}
+              {projects.find(p => p.projectKey === selectedProject)?.link && (
+                <div className="text-center p-4 rounded-lg bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/30">
+                  <p className={`mb-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                    {content[language].redirectingIn}
+                  </p>
+                  <div className="text-4xl font-bold text-orange-500 animate-pulse">
+                    {countdown}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Footer */}
-            <div className="p-6 border-t border-gray-700 flex gap-4">
+            <div className={`p-6 border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} flex gap-4`}>
               <button
                 onClick={closeModal}
                 className={`flex-1 px-6 py-3 rounded-lg transition-all duration-300 ${
@@ -856,16 +961,21 @@ const content: Record<Language, {
               >
                 {content[language].closeModal}
               </button>
-              <button
-                onClick={() => {
-                  window.open('https://albacinema.com.gt/', '_blank');
-                  closeModal();
-                }}
-                className="flex-1 px-6 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white transition-all duration-300 flex items-center justify-center gap-2"
-              >
-                {content[language].visitSite}
-                <ExternalLink size={16} />
-              </button>
+              {projects.find(p => p.projectKey === selectedProject)?.link && (
+                <button
+                  onClick={() => {
+                    const projectLink = projects.find(p => p.projectKey === selectedProject)?.link;
+                    if (projectLink) {
+                      window.open(projectLink, '_blank');
+                      closeModal();
+                    }
+                  }}
+                  className="flex-1 px-6 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                  {content[language].visitSite}
+                  <ExternalLink size={16} />
+                </button>
+              )}
             </div>
           </div>
         </div>
