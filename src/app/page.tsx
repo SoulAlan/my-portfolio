@@ -46,7 +46,7 @@ const Portfolio = () => {
   const [isGuatemala, setIsGuatemala] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isApiPanelOpen, setIsApiPanelOpen] = useState(false);
-const [language, setLanguage] = useState<Language>('es');
+  const [language, setLanguage] = useState<Language>('es');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
   const [countdown, setCountdown] = useState(5);
@@ -105,14 +105,14 @@ const [language, setLanguage] = useState<Language>('es');
     const updateTimes = () => {
       const now = new Date();
       setCurrentTime(now);
-      
+
       // Hora del usuario
       setUserTime(now);
-      
+
       // Detectar zona horaria del usuario
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
       setUserTimezone(timezone);
-      
+
       // Verificar si está en Guatemala
       const guatemalaTimezones = ['America/Guatemala'];
       setIsGuatemala(guatemalaTimezones.includes(timezone));
@@ -156,8 +156,8 @@ const [language, setLanguage] = useState<Language>('es');
     }
   }, [isModalOpen, countdown]);
 
-// Contenido multiidioma
-const content: Record<Language, {
+  // Contenido multiidioma
+  const content: Record<Language, {
     title: string;
     about: string;
     aboutText1: string;
@@ -304,9 +304,9 @@ const content: Record<Language, {
       connect: "Connect",
       myHour: "My hour",
       yourHour: "Your local hour",
-      ourHour: "Our local hour", 
+      ourHour: "Alan local hour",
       fullStack: "Full Stack Development",
-      infrastructure: "Infrastructure & DevOps", 
+      infrastructure: "Infrastructure & DevOps",
       projectManagement: "Project Management",
       technicalLeadership: "Technical Leadership",
       projectTitles: {
@@ -448,11 +448,10 @@ const content: Record<Language, {
       {/* Theme Toggle */}
       <button
         onClick={toggleTheme}
-        className={`fixed top-6 right-6 z-50 p-3 rounded-full transition-all duration-300 hover:scale-110 ${
-          isDarkMode 
-            ? 'bg-gray-800 hover:bg-gray-700 text-yellow-400' 
-            : 'bg-white hover:bg-gray-100 text-gray-800 shadow-lg'
-        }`}
+        className={`fixed top-6 right-6 z-50 p-3 rounded-full transition-all duration-300 hover:scale-110 ${isDarkMode
+          ? 'bg-gray-800 hover:bg-gray-700 text-yellow-400'
+          : 'bg-white hover:bg-gray-100 text-gray-800 shadow-lg'
+          }`}
       >
         {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
       </button>
@@ -460,11 +459,10 @@ const content: Record<Language, {
       {/* Language Toggle */}
       <button
         onClick={toggleLanguage}
-        className={`fixed top-20 right-6 z-50 p-3 rounded-full transition-all duration-300 hover:scale-110 ${
-          isDarkMode 
-            ? 'bg-gray-800 hover:bg-gray-700 text-blue-400' 
-            : 'bg-white hover:bg-gray-100 text-gray-800 shadow-lg'
-        }`}
+        className={`fixed top-20 right-6 z-50 p-3 rounded-full transition-all duration-300 hover:scale-110 ${isDarkMode
+          ? 'bg-gray-800 hover:bg-gray-700 text-blue-400'
+          : 'bg-white hover:bg-gray-100 text-gray-800 shadow-lg'
+          }`}
       >
         <Languages size={20} />
         <span className="absolute -bottom-1 -right-1 text-xs font-bold bg-orange-500 text-white rounded-full w-5 h-5 flex items-center justify-center">
@@ -473,11 +471,10 @@ const content: Record<Language, {
       </button>
 
       {/* Live API Data Panel - Desktop */}
-      <div className={`hidden lg:block fixed top-6 left-6 z-40 p-4 rounded-lg transition-all duration-300 ${
-        isDarkMode ? 'bg-gray-800/90 backdrop-blur-sm' : 'bg-white/90 backdrop-blur-sm shadow-lg'
-      } max-w-sm`}>
-        <h3 className="font-semibold mb-3 text-orange-500">🚀 APIs en Vivo</h3>
-        
+      <div className={`hidden lg:block fixed top-6 left-6 z-40 p-4 rounded-lg transition-all duration-300 ${isDarkMode ? 'bg-gray-800/90 backdrop-blur-sm' : 'bg-white/90 backdrop-blur-sm shadow-lg'
+        } max-w-sm`}>
+        <h3 className="font-semibold mb-3 text-orange-500">Live APIs</h3>
+
         {/* Reloj Guatemala */}
         <div className="flex items-center gap-2 mb-2 text-sm">
           <Clock size={16} className="text-orange-400" />
@@ -525,7 +522,7 @@ const content: Record<Language, {
             <div className="flex justify-between">
               <span>₿ Bitcoin:</span>
               <span className={cryptoData.bitcoin.usd_24h_change > 0 ? 'text-green-400' : 'text-red-400'}>
-                ${cryptoData.bitcoin.usd.toLocaleString()} 
+                ${cryptoData.bitcoin.usd.toLocaleString()}
                 ({cryptoData.bitcoin.usd_24h_change > 0 ? '+' : ''}{cryptoData.bitcoin.usd_24h_change.toFixed(1)}%)
               </span>
             </div>
@@ -543,11 +540,10 @@ const content: Record<Language, {
       {/* Live API Data Panel - Mobile (Collapsible) */}
       <div className="lg:hidden">
         {/* Collapsible Panel */}
-        <div className={`fixed top-6 left-4 z-50 transition-all duration-500 ease-in-out transform ${
-          isApiPanelOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
-        } ${isDarkMode ? 'bg-gray-800/95 backdrop-blur-sm' : 'bg-white/95 backdrop-blur-sm shadow-lg'} 
+        <div className={`fixed top-6 left-4 z-50 transition-all duration-500 ease-in-out transform ${isApiPanelOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
+          } ${isDarkMode ? 'bg-gray-800/95 backdrop-blur-sm' : 'bg-white/95 backdrop-blur-sm shadow-lg'} 
         rounded-lg p-4 max-w-xs relative overflow-hidden`}>
-          
+
           {/* Efecto de chispas naranjas */}
           {isApiPanelOpen && (
             <>
@@ -559,7 +555,7 @@ const content: Record<Language, {
               <div className="absolute top-8 left-1 w-1 h-1 bg-yellow-500 rounded-full animate-ping delay-250"></div>
             </>
           )}
-          
+
           {/* Header con botón de cerrar */}
           <div className="flex items-center justify-between mb-3 relative z-10">
             <h3 className="font-semibold text-orange-500 text-sm">🚀 APIs en Vivo</h3>
@@ -570,7 +566,7 @@ const content: Record<Language, {
               <ChevronLeft size={16} className="text-gray-400" />
             </button>
           </div>
-          
+
           {/* Reloj Guatemala */}
           <div className="flex items-center gap-2 mb-2 text-xs relative z-10">
             <Clock size={14} className="text-orange-400" />
@@ -591,7 +587,7 @@ const content: Record<Language, {
             </div>
           )}
 
-          {/* Si está en Guatemala */}
+          {/* Guatemala */}
           {isGuatemala && (
             <div className="flex items-center gap-2 mb-2 text-xs relative z-10">
               <Clock size={14} className="text-green-400" />
@@ -618,7 +614,7 @@ const content: Record<Language, {
               <div className="flex justify-between">
                 <span className="text-xs">₿ BTC:</span>
                 <span className={`text-xs ${cryptoData.bitcoin.usd_24h_change > 0 ? 'text-green-400' : 'text-red-400'}`}>
-                  ${(cryptoData.bitcoin.usd / 1000).toFixed(0)}k 
+                  ${(cryptoData.bitcoin.usd / 1000).toFixed(0)}k
                   ({cryptoData.bitcoin.usd_24h_change > 0 ? '+' : ''}{cryptoData.bitcoin.usd_24h_change.toFixed(1)}%)
                 </span>
               </div>
@@ -646,7 +642,7 @@ const content: Record<Language, {
 
         {/* Overlay para cerrar al hacer click fuera */}
         {isApiPanelOpen && (
-          <div 
+          <div
             className="fixed inset-0 z-30 bg-black/20 lg:hidden"
             onClick={() => setIsApiPanelOpen(false)}
           />
@@ -654,27 +650,26 @@ const content: Record<Language, {
       </div>
 
       {/* Efecto de linterna */}
-      <div 
+      <div
         className="fixed inset-0 pointer-events-none z-10"
         style={{
-          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, ${
-            isDarkMode ? 'rgba(255, 107, 53, 0.15)' : 'rgba(255, 107, 53, 0.08)'
-          }, transparent 60%)`
+          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, ${isDarkMode ? 'rgba(255, 107, 53, 0.15)' : 'rgba(255, 107, 53, 0.08)'
+            }, transparent 60%)`
         }}
       />
-      
+
       {/* Header/Hero Section */}
-<section className="relative min-h-screen flex items-center justify-center md:pt-0">
+      <section className="relative min-h-screen flex items-center justify-center md:pt-0">
         <div className="max-w-4xl mx-auto text-center z-20">
           {/* Logo */}
           <div className="mb-8 flex justify-center">
-            <img 
-              src="/logo.png" 
-              alt="Alan Cifuentes - Web Developer" 
+            <img
+              src="/logo.png"
+              alt="Alan Cifuentes - Web Developer"
               className="w-32 h-32 md:w-40 md:h-40 object-contain hover:scale-105 transition-transform duration-300"
             />
           </div>
-          
+
           <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 bg-clip-text text-transparent">
             Alan Cifuentes
           </h1>
@@ -682,33 +677,31 @@ const content: Record<Language, {
             {content[language].title}
           </p>
           <div className="flex flex-wrap justify-center gap-6 mb-12">
-            <a 
-              href="https://github.com/SoulAlan" 
-              target="_blank" 
+            <a
+              href="https://github.com/SoulAlan"
+              target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 ${
-                isDarkMode 
-                  ? 'bg-gray-800 hover:bg-gray-700 border border-orange-500/20 hover:border-orange-500/40' 
-                  : 'bg-white hover:bg-gray-50 border border-orange-500/30 hover:border-orange-500/60 shadow-lg'
-              }`}
+              className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 ${isDarkMode
+                ? 'bg-gray-800 hover:bg-gray-700 border border-orange-500/20 hover:border-orange-500/40'
+                : 'bg-white hover:bg-gray-50 border border-orange-500/30 hover:border-orange-500/60 shadow-lg'
+                }`}
             >
               <Github size={20} />
               GitHub
             </a>
-            <a 
-              href="https://linkedin.com/in/alancifuentessiliezar" 
-              target="_blank" 
+            <a
+              href="https://linkedin.com/in/alancifuentessiliezar"
+              target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 text-white"
             >
               <Linkedin size={20} />
               LinkedIn
             </a>
-            <a 
-              href="mailto: a.fernando_cifuentes@yahoo.com" 
-              className={`flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 font-medium ${
-                isDarkMode ? 'text-gray-900' : 'text-white'
-              }`}
+            <a
+              href="mailto: a.fernando_cifuentes@yahoo.com"
+              className={`flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 font-medium ${isDarkMode ? 'text-gray-900' : 'text-white'
+                }`}
             >
               <Mail size={20} />
               Contacto
@@ -739,19 +732,19 @@ const content: Record<Language, {
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <Code className="text-orange-500" size={24} />
-                <span className="text-lg">Desarrollo Full Stack</span>
+                <span className="text-lg">{content[language].fullStack}</span>
               </div>
               <div className="flex items-center gap-4">
                 <Server className="text-yellow-400" size={24} />
-                <span className="text-lg">Infraestructura & DevOps</span>
+                <span className="text-lg">{content[language].infrastructure}</span>
               </div>
               <div className="flex items-center gap-4">
                 <Users className="text-red-500" size={24} />
-                <span className="text-lg">Gestión de Proyectos</span>
+                <span className="text-lg">{content[language].projectManagement}</span>
               </div>
               <div className="flex items-center gap-4">
                 <Briefcase className="text-orange-400" size={24} />
-                <span className="text-lg">Liderazgo Técnico</span>
+                <span className="text-lg">{content[language].technicalLeadership}</span>
               </div>
             </div>
           </div>
@@ -764,11 +757,10 @@ const content: Record<Language, {
           <h2 className="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent">{content[language].skills}</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {skills.map((skillGroup, index) => (
-              <div key={index} className={`p-6 rounded-lg hover:scale-105 transition-all duration-300 ${
-                isDarkMode 
-                  ? 'bg-gray-800 hover:bg-gray-700 border border-orange-500/20 hover:border-orange-500/40' 
-                  : 'bg-white hover:bg-gray-50 border border-orange-500/30 hover:border-orange-500/60 shadow-lg hover:shadow-xl'
-              }`}>
+              <div key={index} className={`p-6 rounded-lg hover:scale-105 transition-all duration-300 ${isDarkMode
+                ? 'bg-gray-800 hover:bg-gray-700 border border-orange-500/20 hover:border-orange-500/40'
+                : 'bg-white hover:bg-gray-50 border border-orange-500/30 hover:border-orange-500/60 shadow-lg hover:shadow-xl'
+                }`}>
                 <h3 className="text-xl font-semibold mb-4 text-orange-400">{skillGroup.category}</h3>
                 <ul className="space-y-2">
                   {skillGroup.items.map((skill, skillIndex) => (
@@ -787,11 +779,10 @@ const content: Record<Language, {
           <h2 className="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent">{content[language].experience}</h2>
           <div className="space-y-8">
             {experience.map((exp, index) => (
-              <div key={index} className={`p-8 rounded-lg border transition-all duration-300 ${
-                isDarkMode 
-                  ? 'bg-gray-800/30 border-gray-700 hover:border-orange-500' 
-                  : 'bg-white border-gray-200 hover:border-orange-500 shadow-lg hover:shadow-xl'
-              }`}>
+              <div key={index} className={`p-8 rounded-lg border transition-all duration-300 ${isDarkMode
+                ? 'bg-gray-800/30 border-gray-700 hover:border-orange-500'
+                : 'bg-white border-gray-200 hover:border-orange-500 shadow-lg hover:shadow-xl'
+                }`}>
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                   <h3 className="text-2xl font-semibold text-orange-400">{exp.title}</h3>
                   <span className={`md:text-right ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{exp.period}</span>
@@ -818,11 +809,10 @@ const content: Record<Language, {
             {projects.map((project, index) => (
               <div
                 key={index}
-                className={`p-6 rounded-lg transition-all duration-300 group border hover:scale-105 ${
-                  isDarkMode
-                    ? 'bg-gray-800 hover:bg-gray-700 border-orange-500/20 hover:border-orange-500/40'
-                    : 'bg-white hover:bg-gray-50 border-orange-500/30 hover:border-orange-500/60 shadow-lg hover:shadow-xl'
-                } ${project.hasModal ? 'cursor-pointer' : ''}`}
+                className={`p-6 rounded-lg transition-all duration-300 group border hover:scale-105 ${isDarkMode
+                  ? 'bg-gray-800 hover:bg-gray-700 border-orange-500/20 hover:border-orange-500/40'
+                  : 'bg-white hover:bg-gray-50 border-orange-500/30 hover:border-orange-500/60 shadow-lg hover:shadow-xl'
+                  } ${project.hasModal ? 'cursor-pointer' : ''}`}
                 onClick={() => project.hasModal && project.projectKey && openModal(project.projectKey)}
               >
                 <h3 className="text-xl font-semibold mb-3 text-orange-400 group-hover:text-orange-300">
@@ -850,23 +840,22 @@ const content: Record<Language, {
             {content[language].contactText}
           </p>
           <div className="flex flex-wrap justify-center gap-6">
-            <a 
-              href="https://github.com/SoulAlan" 
-              target="_blank" 
+            <a
+              href="https://github.com/SoulAlan"
+              target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center gap-2 px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 ${
-                isDarkMode 
-                  ? 'bg-gray-800 hover:bg-gray-700 border border-orange-500/20 hover:border-orange-500/40' 
-                  : 'bg-white hover:bg-gray-50 border border-orange-500/30 hover:border-orange-500/60 shadow-lg'
-              }`}
+              className={`flex items-center gap-2 px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 ${isDarkMode
+                ? 'bg-gray-800 hover:bg-gray-700 border border-orange-500/20 hover:border-orange-500/40'
+                : 'bg-white hover:bg-gray-50 border border-orange-500/30 hover:border-orange-500/60 shadow-lg'
+                }`}
             >
               <Github size={24} />
               {content[language].viewCode}
               <ExternalLink size={16} />
             </a>
-            <a 
-              href="https://linkedin.com/in/alancifuentessiliezar" 
-              target="_blank" 
+            <a
+              href="https://linkedin.com/in/alancifuentessiliezar"
+              target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 text-white"
             >
@@ -888,9 +877,8 @@ const content: Record<Language, {
           />
 
           {/* Modal Content */}
-          <div className={`relative max-w-3xl w-full rounded-xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto ${
-            isDarkMode ? 'bg-gray-800' : 'bg-white'
-          }`}>
+          <div className={`relative max-w-3xl w-full rounded-xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto ${isDarkMode ? 'bg-gray-800' : 'bg-white'
+            }`}>
             {/* Header */}
             <div className="bg-gradient-to-r from-orange-500 to-red-500 p-6">
               <h3 className="text-2xl font-bold text-white">
@@ -953,11 +941,10 @@ const content: Record<Language, {
             <div className={`p-6 border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} flex gap-4`}>
               <button
                 onClick={closeModal}
-                className={`flex-1 px-6 py-3 rounded-lg transition-all duration-300 ${
-                  isDarkMode
-                    ? 'bg-gray-700 hover:bg-gray-600 text-white'
-                    : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
-                }`}
+                className={`flex-1 px-6 py-3 rounded-lg transition-all duration-300 ${isDarkMode
+                  ? 'bg-gray-700 hover:bg-gray-600 text-white'
+                  : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
+                  }`}
               >
                 {content[language].closeModal}
               </button>
@@ -982,9 +969,8 @@ const content: Record<Language, {
       )}
 
       {/* Footer */}
-      <footer className={`py-8 px-4 border-t relative z-20 ${
-        isDarkMode ? 'bg-gray-900 border-gray-800' : 'bg-gray-50 border-gray-200'
-      }`}>
+      <footer className={`py-8 px-4 border-t relative z-20 ${isDarkMode ? 'bg-gray-900 border-gray-800' : 'bg-gray-50 border-gray-200'
+        }`}>
         <div className="max-w-4xl mx-auto text-center">
           <p className={isDarkMode ? 'text-gray-400' : 'text-gray-600'}>
             © 2025 Alan Cifuentes. Desarrollado con Next.js y Tailwind CSS.
