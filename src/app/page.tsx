@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, Code, Server, Users, Briefcase, ChevronDown, ExternalLink, Sun, Moon, MapPin, Calendar, Clock, Thermometer, Wind, Eye, Activity, ChevronLeft, ChevronRight, Languages, Sparkles } from 'lucide-react';
+import { Github, Linkedin, Mail, Code, Server, Users, Briefcase, ChevronDown, ExternalLink, Sun, Moon, MapPin, Calendar, Clock, Thermometer, Wind, Eye, Activity, ChevronLeft, ChevronRight, Languages, Sparkles, Zap, Cpu } from 'lucide-react';
+import AIAcceleratedSection from '@/components/AIAcceleratedSection';
 
 interface WeatherData {
   name: string;
@@ -210,11 +211,11 @@ const Portfolio = () => {
     privateProject: string;
   }> = {
     es: {
-      title: "Desarrollador Full Stack & Technology Project Manager con más de 8 años transformando ideas en soluciones digitales robustas",
+      title: "Senior Full Stack Engineer | Entregando Sistemas Production-Grade 3-4x Más Rápido con AI-Assisted Workflows",
       about: "Sobre Mí",
-      aboutText1: "Soy un desarrollador full stack apasionado con más de 8 años de experiencia en el desarrollo de soluciones web complejas y gestión de proyectos tecnológicos. Mi experiencia abarca desde la infraestructura de redes hasta el desarrollo de aplicaciones web modernas.",
-      aboutText2: "Como Project Manager, he liderado equipos en proyectos de infraestructura física de redes y comunicaciones, mientras que como desarrollador, he creado sistemas de administración, plataformas de cotización y herramientas de automatización empresarial.",
-      aboutText3: "Actualmente combino mis roles de PM y desarrollador, creando estructuras para proyectos web y aplicaciones mientras guío equipos hacia el éxito.",
+      aboutText1: "Ingeniero full stack con más de 8 años arquitectando plataformas e-commerce escalables y soluciones CMS personalizadas. Aprovecho flujos de trabajo AI-assisted para entregar proyectos complejos en días, no semanas.",
+      aboutText2: "Desde 2022, he estado a la vanguardia del desarrollo AI-assisted, integrando herramientas como Claude Code y GitHub Copilot en mi flujo diario. Esto no se trata de reemplazar habilidades de ingeniería, sino de multiplicar el output manteniendo los mismos estándares rigurosos.",
+      aboutText3: "Trato la AI como un multiplicador de fuerza: maneja el boilerplate y acelera la implementación, mientras yo me enfoco en arquitectura, seguridad, integración y production-readiness.",
       skills: "Habilidades Técnicas",
       experience: "Experiencia Profesional",
       projects: "Proyectos Destacados",
@@ -290,11 +291,11 @@ const Portfolio = () => {
       privateProject: "Proyecto Privado"
     },
     en: {
-      title: "Full Stack Developer & Technology Project Manager with 8+ years transforming ideas into robust digital solutions",
+      title: "Senior Full Stack Engineer | Delivering Production-Grade Systems 3-4x Faster with AI-Assisted Workflows",
       about: "About Me",
-      aboutText1: "I am a passionate full stack developer with over 8 years of experience in developing complex web solutions and managing technology projects. My experience ranges from network infrastructure to modern web application development.",
-      aboutText2: "As a Project Manager, I have led teams on physical network and communications infrastructure projects, while as a developer, I have created management systems, quotation platforms, and business automation tools.",
-      aboutText3: "I currently combine my PM and developer roles, creating structures for web projects and applications while guiding teams to success.",
+      aboutText1: "Full stack engineer with 8+ years architecting scalable e-commerce platforms and custom CMS solutions. Leveraging AI-assisted workflows to deliver complex projects in days, not weeks.",
+      aboutText2: "Since 2022, I've been at the forefront of AI-assisted development, integrating tools like Claude Code and GitHub Copilot into my daily workflow. This isn't about replacing engineering skill—it's about multiplying output while maintaining rigorous standards.",
+      aboutText3: "I treat AI as a force multiplier: it handles boilerplate and accelerates implementation, while I focus on architecture, security, integration, and production-readiness.",
       skills: "Technical Skills",
       experience: "Professional Experience",
       projects: "Featured Projects",
@@ -372,10 +373,10 @@ const Portfolio = () => {
   };
 
   const skills = [
-    { category: "Frontend", items: ["React", "Next.js", "JavaScript", "CSS", "HTML", "Tailwind CSS"] },
-    { category: "Backend", items: ["PHP", "Node.js", "API Integration", "SAP APIs", "Database Design"] },
+    { category: "Frontend", items: ["React", "Next.js", "JavaScript", "TypeScript", "Tailwind CSS", "HTML/CSS"] },
+    { category: "Backend", items: ["PHP", "Node.js", "Laravel", "API Integration", "SAP APIs", "Database Design"] },
     { category: "Infrastructure", items: ["AWS", "Linode", "VPS", "SSH", "Domain Management", "Server Deployment"] },
-    { category: "Project Management", items: ["Team Leadership", "Project Planning", "Infrastructure Projects", "Agile Methodologies"] }
+    { category: "AI-Assisted Dev", items: ["Claude Code (CLI)", "Claude API", "GitHub Copilot", "AI Workflows (3+ years)"], isAI: true }
   ];
 
   const experience = [
@@ -406,7 +407,8 @@ const Portfolio = () => {
       tech: ["PHP", "JavaScript", "CSS", "API Integration"],
       hasModal: true,
       projectKey: 'businessManagement',
-      isPrivate: true
+      isPrivate: true,
+      aiBadge: null
     },
     {
       title: content[language].projectTitles.quotationPlatform,
@@ -414,24 +416,28 @@ const Portfolio = () => {
       tech: ["PHP", "JavaScript", "SAP API", "PDF Generation"],
       hasModal: true,
       projectKey: 'quotationPlatform',
-      hasImages: true
+      hasImages: true,
+      aiBadge: { type: 'accelerated', label: language === 'es' ? 'AI-Accelerated' : 'AI-Accelerated' }
     },
     {
       title: content[language].projectTitles.digitalSignatures,
       description: content[language].projectDescriptions.digitalSignatures,
       tech: ["JavaScript", "PHP", "CSS", "API Integration"],
       hasModal: true,
-      projectKey: 'digitalSignatures'
+      projectKey: 'digitalSignatures',
+      aiBadge: { type: 'enhanced', label: language === 'es' ? 'AI-Enhanced' : 'AI-Enhanced' }
     },
     {
       title: content[language].projectTitles.reactApps,
       description: content[language].projectDescriptions.reactApps,
-      tech: ["React", "JavaScript", "CSS"]
+      tech: ["React", "JavaScript", "CSS"],
+      aiBadge: null
     },
     {
       title: content[language].projectTitles.interactivePortfolio,
       description: content[language].projectDescriptions.interactivePortfolio,
-      tech: ["Next.js", "React", "Tailwind CSS", "APIs", "Real-time Data"]
+      tech: ["Next.js", "React", "Tailwind CSS", "Claude Code"],
+      aiBadge: { type: 'accelerated', label: language === 'es' ? 'AI-Accelerated' : 'AI-Accelerated' }
     },
     {
       title: content[language].projectTitles.cinemaManagement,
@@ -439,7 +445,8 @@ const Portfolio = () => {
       tech: ["PHP", "JavaScript", "CSS", "QR Integration"],
       link: "https://albacinema.com.gt/",
       hasModal: true,
-      projectKey: 'cinemaManagement'
+      projectKey: 'cinemaManagement',
+      aiBadge: { type: 'performance', label: language === 'es' ? 'High-Performance' : 'High-Performance' }
     }
   ];
 
@@ -751,17 +758,30 @@ const Portfolio = () => {
         </div>
       </section>
 
+      {/* AI-Accelerated Development Section */}
+      <AIAcceleratedSection isDarkMode={isDarkMode} language={language} />
+
       {/* Skills Section */}
       <section className={`py-20 px-4 relative z-20 ${isDarkMode ? 'bg-gray-800/50' : 'bg-gray-100/50'}`}>
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent">{content[language].skills}</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {skills.map((skillGroup, index) => (
-              <div key={index} className={`p-6 rounded-lg hover:scale-105 transition-all duration-300 ${isDarkMode
-                ? 'bg-gray-800 hover:bg-gray-700 border border-orange-500/20 hover:border-orange-500/40'
-                : 'bg-white hover:bg-gray-50 border border-orange-500/30 hover:border-orange-500/60 shadow-lg hover:shadow-xl'
+              <div key={index} className={`p-6 rounded-lg hover:scale-105 transition-all duration-300 ${
+                (skillGroup as { isAI?: boolean }).isAI
+                  ? isDarkMode
+                    ? 'bg-gradient-to-br from-gray-800 to-gray-800/50 hover:from-gray-700 hover:to-gray-700/50 border-2 border-orange-500/40 hover:border-orange-500/60 ring-2 ring-orange-500/10'
+                    : 'bg-gradient-to-br from-orange-50 to-white hover:from-orange-100 hover:to-white border-2 border-orange-500/50 hover:border-orange-500/70 shadow-lg hover:shadow-xl'
+                  : isDarkMode
+                    ? 'bg-gray-800 hover:bg-gray-700 border border-orange-500/20 hover:border-orange-500/40'
+                    : 'bg-white hover:bg-gray-50 border border-orange-500/30 hover:border-orange-500/60 shadow-lg hover:shadow-xl'
                 }`}>
-                <h3 className="text-xl font-semibold mb-4 text-orange-400">{skillGroup.category}</h3>
+                <div className="flex items-center gap-2 mb-4">
+                  {(skillGroup as { isAI?: boolean }).isAI && <Zap size={20} className="text-orange-500" />}
+                  <h3 className={`text-xl font-semibold ${(skillGroup as { isAI?: boolean }).isAI ? 'text-orange-500' : 'text-orange-400'}`}>
+                    {skillGroup.category}
+                  </h3>
+                </div>
                 <ul className="space-y-2">
                   {skillGroup.items.map((skill, skillIndex) => (
                     <li key={skillIndex} className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>{skill}</li>
@@ -815,6 +835,23 @@ const Portfolio = () => {
                   } ${project.hasModal ? 'cursor-pointer' : ''}`}
                 onClick={() => project.hasModal && project.projectKey && openModal(project.projectKey)}
               >
+                {/* AI Badge */}
+                {project.aiBadge && (
+                  <div className="mb-3">
+                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${
+                      project.aiBadge.type === 'accelerated'
+                        ? 'bg-gradient-to-r from-orange-500/20 to-red-500/20 text-orange-400 border border-orange-500/30'
+                        : project.aiBadge.type === 'enhanced'
+                        ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-400 border border-blue-500/30'
+                        : 'bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-400 border border-green-500/30'
+                    }`}>
+                      {project.aiBadge.type === 'accelerated' && <Zap size={12} />}
+                      {project.aiBadge.type === 'enhanced' && <Cpu size={12} />}
+                      {project.aiBadge.type === 'performance' && <Zap size={12} />}
+                      {project.aiBadge.label}
+                    </span>
+                  </div>
+                )}
                 <h3 className="text-xl font-semibold mb-3 text-orange-400 group-hover:text-orange-300">
                   {project.title}
                 </h3>
