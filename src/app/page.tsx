@@ -209,6 +209,12 @@ const Portfolio = () => {
     closeModal: string;
     redirectingIn: string;
     privateProject: string;
+    experienceData: {
+      title: string;
+      period: string;
+      description: string;
+      highlights: string[];
+    }[];
   }> = {
     es: {
       title: "Senior Full Stack Engineer | Entregando Sistemas Production-Grade 3-4x Más Rápido con AI-Assisted Workflows",
@@ -288,7 +294,27 @@ const Portfolio = () => {
       visitSite: "Visitar sitio web",
       closeModal: "Cerrar",
       redirectingIn: "Redirigiendo en",
-      privateProject: "Proyecto Privado"
+      privateProject: "Proyecto Privado",
+      experienceData: [
+        {
+          title: "Technology Project Manager & Full Stack Developer",
+          period: "8+ años de experiencia",
+          description: "Liderazgo de proyectos de infraestructura física de redes y comunicaciones, desarrollo de sistemas web complejos y gestión de equipos de desarrollo. Implementación de flujos AI-assisted para acelerar entregas.",
+          highlights: ["Gestión de proyectos tecnológicos", "Desarrollo de sistemas de administración", "Integración con APIs externas", "AI-Assisted Workflows"]
+        },
+        {
+          title: "Desarrollador Web Full Stack",
+          period: "Experiencia continua",
+          description: "Desarrollo y mantenimiento de aplicaciones web, rediseño de sitios, implementación de filtros dinámicos y mejoras de rendimiento usando herramientas AI modernas.",
+          highlights: ["Rediseño de interfaces web", "Integración con APIs", "Sistemas de cotización", "Optimización de rendimiento"]
+        },
+        {
+          title: "Especialista en Integración de Sistemas",
+          period: "Proyectos diversos",
+          description: "Conexión con sistemas empresariales como SAP, desarrollo de herramientas internas y automatización de procesos con asistencia de AI.",
+          highlights: ["Integración SAP", "Generación automática de documentos", "Sistemas de firma digital", "Automatización de procesos"]
+        }
+      ]
     },
     en: {
       title: "Senior Full Stack Engineer | Delivering Production-Grade Systems 3-4x Faster with AI-Assisted Workflows",
@@ -368,7 +394,27 @@ const Portfolio = () => {
       visitSite: "Visit website",
       closeModal: "Close",
       redirectingIn: "Redirecting in",
-      privateProject: "Private Project"
+      privateProject: "Private Project",
+      experienceData: [
+        {
+          title: "Technology Project Manager & Full Stack Developer",
+          period: "8+ years of experience",
+          description: "Leadership of physical network and communications infrastructure projects, complex web systems development, and development team management. Implementing AI-assisted workflows to accelerate deliveries.",
+          highlights: ["Technology Project Management", "Administration Systems Development", "External API Integration", "AI-Assisted Workflows"]
+        },
+        {
+          title: "Full Stack Web Developer",
+          period: "Ongoing experience",
+          description: "Development and maintenance of web applications, site redesigns, dynamic filters implementation, and performance improvements using modern AI tools.",
+          highlights: ["Web Interface Redesign", "API Integration", "Quotation Systems", "Performance Optimization"]
+        },
+        {
+          title: "Systems Integration Specialist",
+          period: "Various projects",
+          description: "Connection with enterprise systems like SAP, internal tools development, and process automation with AI assistance.",
+          highlights: ["SAP Integration", "Automatic Document Generation", "Digital Signature Systems", "Process Automation"]
+        }
+      ]
     }
   };
 
@@ -379,26 +425,7 @@ const Portfolio = () => {
     { category: "AI-Assisted Dev", items: ["Claude Code (CLI)", "Claude API", "GitHub Copilot", "AI Workflows (3+ years)"], isAI: true }
   ];
 
-  const experience = [
-    {
-      title: "Technology Project Manager & Full Stack Developer",
-      period: "8+ años de experiencia",
-      description: "Liderazgo de proyectos de infraestructura física de redes y comunicaciones, desarrollo de sistemas web complejos y gestión de equipos de desarrollo.",
-      highlights: ["Gestión de proyectos tecnológicos", "Desarrollo de sistemas de administración", "Integración con APIs externas", "Optimización de infraestructura"]
-    },
-    {
-      title: "Desarrollador Web Full Stack",
-      period: "Experiencia continua",
-      description: "Desarrollo y mantenimiento de aplicaciones web, rediseño de sitios, implementación de filtros dinámicos y mejoras de rendimiento.",
-      highlights: ["Rediseño de interfaces web", "Integración con APIs", "Sistemas de cotización", "Optimización de rendimiento"]
-    },
-    {
-      title: "Especialista en Integración de Sistemas",
-      period: "Proyectos diversos",
-      description: "Conexión con sistemas empresariales como SAP, desarrollo de herramientas internas y automatización de procesos.",
-      highlights: ["Integración SAP", "Generación automática de documentos", "Sistemas de firma digital", "Automatización de procesos"]
-    }
-  ];
+  // Experience now comes from content[language].experienceData
 
   const projects = [
     {
@@ -798,7 +825,7 @@ const Portfolio = () => {
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent">{content[language].experience}</h2>
           <div className="space-y-8">
-            {experience.map((exp, index) => (
+            {content[language].experienceData.map((exp, index) => (
               <div key={index} className={`p-8 rounded-lg border transition-all duration-300 ${isDarkMode
                 ? 'bg-gray-800/30 border-gray-700 hover:border-orange-500'
                 : 'bg-white border-gray-200 hover:border-orange-500 shadow-lg hover:shadow-xl'
