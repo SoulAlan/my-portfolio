@@ -50,7 +50,6 @@ const Portfolio = () => {
   const [language, setLanguage] = useState<Language>('es');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
-  const [countdown, setCountdown] = useState(5);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -135,27 +134,12 @@ const Portfolio = () => {
   const openModal = (projectKey: string) => {
     setSelectedProject(projectKey);
     setIsModalOpen(true);
-    setCountdown(5);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedProject(null);
-    setCountdown(5);
   };
-
-  // Contador regresivo para redirigir
-  useEffect(() => {
-    if (isModalOpen && countdown > 0) {
-      const timer = setTimeout(() => {
-        setCountdown(countdown - 1);
-      }, 1000);
-      return () => clearTimeout(timer);
-    } else if (isModalOpen && countdown === 0) {
-      window.open('https://albacinema.com.gt/', '_blank');
-      closeModal();
-    }
-  }, [isModalOpen, countdown]);
 
   // Contenido multiidioma
   const content: Record<Language, {
@@ -244,12 +228,12 @@ const Portfolio = () => {
       projectManagement: "Gestión de Proyectos",
       technicalLeadership: "Liderazgo Técnico",
       projectTitles: {
-        businessManagement: "Tiendy — Plataforma E-Commerce con FEL y Automatización de Envíos",
+        businessManagement: "Plataforma E-Commerce con FEL y Automatización de Envíos",
         quotationPlatform: "ERP de Cotizaciones con Integración SAP Business One",
         digitalSignatures: "Generador de Firmas Corporativas Multi-Empresa",
         reactApps: "Suite de Apps React para Gestión de Espacios de Trabajo",
         interactivePortfolio: "Portafolio con AI-Assisted Development en Producción",
-        cinemaManagement: "Alba Cinema — Plataforma de Reservas y Ticketing de Alta Demanda"
+        cinemaManagement: "Plataforma de Reservas y Ticketing para Cadena de Cines Nacional"
       },
       projectDescriptions: {
         businessManagement: "Plataforma Shopify custom con integración de facturación electrónica FEL (SAT Guatemala), automatización de envíos multi-carrier y panel de administración. Reducción del 70% en tiempo de procesamiento de órdenes.",
@@ -305,7 +289,7 @@ const Portfolio = () => {
       experienceData: [
         {
           title: "Senior Full Stack Developer & Tech Lead",
-          company: "Aumenta GT",
+          company: "Tech & E-Commerce Agency",
           period: "2022 — Presente",
           description: "Arquitectura y desarrollo de plataformas e-commerce, sistemas de integración empresarial y aplicaciones de alta demanda. Pionero en adopción de AI-assisted workflows (Claude Code, GitHub Copilot) que redujeron los tiempos de entrega en 3-4x. Líder técnico en proyectos con integración a Shopify, SAP Business One y sistemas de facturación electrónica.",
           highlights: ["Node.js · TypeScript · React/Next.js", "Shopify API · SAP Business One", "6+ años experiencia · AI-Assisted desde 2022", "FEL · Facturación Electrónica GT"]
@@ -350,12 +334,12 @@ const Portfolio = () => {
       projectManagement: "Project Management",
       technicalLeadership: "Technical Leadership",
       projectTitles: {
-        businessManagement: "Tiendy — Shopify E-Commerce with FEL Invoicing & Shipping Automation",
+        businessManagement: "Shopify E-Commerce Platform with FEL Invoicing & Shipping Automation",
         quotationPlatform: "SAP Business One Quotation Platform",
         digitalSignatures: "Multi-Company Corporate Signature Generator",
         reactApps: "React Workspace Management Suite",
         interactivePortfolio: "Portfolio Built with AI-Assisted Development",
-        cinemaManagement: "Alba Cinema — High-Traffic Booking & Ticketing Platform"
+        cinemaManagement: "High-Traffic Cinema Booking & Ticketing Platform"
       },
       projectDescriptions: {
         businessManagement: "Custom Shopify platform with FEL electronic invoicing (Guatemala SAT), multi-carrier shipping automation, and admin dashboard. Reduced order processing time by 70%.",
@@ -411,7 +395,7 @@ const Portfolio = () => {
       experienceData: [
         {
           title: "Senior Full Stack Developer & Tech Lead",
-          company: "Aumenta GT",
+          company: "Tech & E-Commerce Agency",
           period: "2022 — Present",
           description: "Architecture and development of e-commerce platforms, enterprise integration systems, and high-traffic applications. Pioneer in AI-assisted workflows (Claude Code, GitHub Copilot) reducing delivery times by 3-4x. Technical lead on projects integrating Shopify, SAP Business One, and electronic invoicing systems.",
           highlights: ["Node.js · TypeScript · React/Next.js", "Shopify API · SAP Business One", "6+ yrs experience · AI-Assisted since 2022", "FEL · Electronic Invoicing GT"]
@@ -452,6 +436,7 @@ const Portfolio = () => {
       projectKey: 'businessManagement',
       isPrivate: true,
       flagship: true,
+      preview: null,
       metric: language === 'es' ? '70% menos tiempo por orden' : '70% faster order processing',
       aiBadge: { type: 'accelerated', label: 'AI-Accelerated' }
     },
@@ -459,10 +444,10 @@ const Portfolio = () => {
       title: content[language].projectTitles.cinemaManagement,
       description: content[language].projectDescriptions.cinemaManagement,
       tech: ["PHP", "JavaScript", "QR Integration", "Payment APIs"],
-      link: "https://albacinema.com.gt/",
       hasModal: true,
       projectKey: 'cinemaManagement',
       flagship: true,
+      preview: null,
       metric: language === 'es' ? 'Cientos de transacciones/día' : 'Hundreds of daily transactions',
       aiBadge: { type: 'performance', label: 'High-Performance' }
     },
@@ -473,6 +458,7 @@ const Portfolio = () => {
       hasModal: true,
       projectKey: 'quotationPlatform',
       hasImages: true,
+      preview: '/Multi_dash.png',
       metric: language === 'es' ? '20 min → menos de 2 min por cotización' : '20 min → under 2 min per quote',
       aiBadge: { type: 'accelerated', label: 'AI-Accelerated' }
     },
@@ -482,6 +468,7 @@ const Portfolio = () => {
       tech: ["JavaScript", "PHP", "Azure", "REST API"],
       hasModal: true,
       projectKey: 'digitalSignatures',
+      preview: null,
       metric: language === 'es' ? '200+ empleados, cero configuración manual' : '200+ employees, zero manual setup',
       aiBadge: { type: 'enhanced', label: 'AI-Enhanced' }
     },
@@ -489,6 +476,7 @@ const Portfolio = () => {
       title: content[language].projectTitles.reactApps,
       description: content[language].projectDescriptions.reactApps,
       tech: ["React", "TypeScript", "JavaScript"],
+      preview: null,
       metric: language === 'es' ? '40% menos conflictos de reserva' : '40% fewer booking conflicts',
       aiBadge: null
     },
@@ -496,6 +484,7 @@ const Portfolio = () => {
       title: content[language].projectTitles.interactivePortfolio,
       description: content[language].projectDescriptions.interactivePortfolio,
       tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Claude Code"],
+      preview: null,
       aiBadge: { type: 'accelerated', label: 'AI-Accelerated' }
     }
   ];
@@ -716,68 +705,107 @@ const Portfolio = () => {
       />
 
       {/* Header/Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center md:pt-0">
-        <div className="max-w-4xl mx-auto text-center z-20">
-          {/* Logo */}
-          <div className="mb-8 flex justify-center">
-            <img
-              src="/logo.png"
-              alt="Alan Cifuentes - Web Developer"
-              className="w-32 h-32 md:w-40 md:h-40 object-contain hover:scale-105 transition-transform duration-300"
-            />
+      <section className="relative min-h-screen flex items-center justify-center px-4 md:pt-0">
+        <div className="max-w-5xl mx-auto w-full z-20">
+          {/* Two-column layout: photo left, text right (stacked on mobile) */}
+          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+
+            {/* Avatar column */}
+            <div className="flex-shrink-0 flex flex-col items-center gap-4">
+              <div className="relative">
+                <div className="w-44 h-44 md:w-56 md:h-56 rounded-2xl overflow-hidden border-2 border-orange-500/40 shadow-2xl shadow-orange-500/20">
+                  <img
+                    src="/logo.png"
+                    alt="Alan Cifuentes — Senior Full Stack Developer"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                {/* Online badge */}
+                <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/20 border border-green-500/50 text-green-400 text-xs font-semibold whitespace-nowrap">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                  {content[language].openToRemote}
+                </span>
+              </div>
+
+              {/* Quick stats below avatar */}
+              <div className={`mt-4 grid grid-cols-3 gap-3 text-center w-full max-w-xs`}>
+                <div className={`p-2 rounded-xl ${isDarkMode ? 'bg-gray-800/80 border border-gray-700' : 'bg-white border border-gray-200 shadow-sm'}`}>
+                  <p className="text-xl font-bold text-orange-400">6+</p>
+                  <p className={`text-xs leading-tight mt-0.5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{language === 'es' ? 'años exp.' : 'yrs exp.'}</p>
+                </div>
+                <div className={`p-2 rounded-xl ${isDarkMode ? 'bg-gray-800/80 border border-gray-700' : 'bg-white border border-gray-200 shadow-sm'}`}>
+                  <p className="text-xl font-bold text-orange-400">3-4x</p>
+                  <p className={`text-xs leading-tight mt-0.5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{language === 'es' ? 'más rápido' : 'faster'}</p>
+                </div>
+                <div className={`p-2 rounded-xl ${isDarkMode ? 'bg-gray-800/80 border border-gray-700' : 'bg-white border border-gray-200 shadow-sm'}`}>
+                  <p className="text-xl font-bold text-orange-400">AI</p>
+                  <p className={`text-xs leading-tight mt-0.5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{language === 'es' ? 'desde 2022' : 'since 2022'}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Text column */}
+            <div className="flex-1 text-center md:text-left">
+              <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-4 ${isDarkMode ? 'bg-gray-800 border border-gray-700 text-gray-400' : 'bg-white border border-gray-200 text-gray-500 shadow-sm'}`}>
+                <MapPin size={12} className="text-orange-400" />
+                Guatemala — Remote
+              </div>
+
+              <h1 className="text-5xl md:text-7xl font-bold mb-3 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 bg-clip-text text-transparent leading-tight">
+                Alan Cifuentes
+              </h1>
+
+              <p className={`text-lg md:text-xl mb-2 font-semibold leading-snug ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
+                Senior Full Stack Engineer
+              </p>
+              <p className={`text-base mb-4 leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                {content[language].title.replace('Senior Full Stack Engineer — ', '').replace('Senior Full Stack Engineer — ', '')}
+              </p>
+              <p className={`text-sm mb-6 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+                {content[language].subtitle}
+              </p>
+
+              {/* Tech stack pills */}
+              <div className="flex flex-wrap gap-2 mb-6 justify-center md:justify-start">
+                {['Node.js', 'TypeScript', 'React', 'Next.js', 'PostgreSQL', 'AWS', 'Claude Code'].map(tech => (
+                  <span key={tech} className={`px-3 py-1 rounded-full text-xs font-medium border ${isDarkMode ? 'bg-gray-800 border-gray-700 text-gray-300' : 'bg-gray-50 border-gray-200 text-gray-600'}`}>
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+                <a
+                  href="mailto:a.fernando_cifuentes@yahoo.com"
+                  className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 text-white font-medium"
+                >
+                  <Mail size={18} />
+                  {content[language].contactMe}
+                </a>
+                <a
+                  href="https://linkedin.com/in/alancifuentessiliezar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 ${isDarkMode ? 'bg-gray-800 hover:bg-gray-700 border border-gray-700' : 'bg-white hover:bg-gray-50 border border-gray-200 shadow-md'}`}
+                >
+                  <Linkedin size={18} />
+                  LinkedIn
+                </a>
+                <a
+                  href="https://github.com/SoulAlan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 ${isDarkMode ? 'bg-gray-800 hover:bg-gray-700 border border-gray-700' : 'bg-white hover:bg-gray-50 border border-gray-200 shadow-md'}`}
+                >
+                  <Github size={18} />
+                  GitHub
+                </a>
+              </div>
+            </div>
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-bold mb-4 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 bg-clip-text text-transparent">
-            Alan Cifuentes
-          </h1>
-          <p className={`text-xl md:text-2xl mb-3 max-w-3xl mx-auto leading-relaxed font-medium ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
-            {content[language].title}
-          </p>
-          <p className={`text-base md:text-lg mb-5 max-w-2xl mx-auto ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-            {content[language].subtitle}
-          </p>
-          <div className="flex flex-wrap justify-center gap-3 mb-8">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/15 border border-green-500/40 text-green-400 text-sm font-medium">
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              {content[language].openToRemote}
-            </span>
-            <span className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-gray-800 border border-gray-700 text-gray-300' : 'bg-white border border-gray-200 text-gray-600 shadow-sm'}`}>
-              <MapPin size={14} className="text-orange-400" />
-              Guatemala — Remote
-            </span>
-          </div>
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <a
-              href="https://github.com/SoulAlan"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 ${isDarkMode
-                ? 'bg-gray-800 hover:bg-gray-700 border border-orange-500/20 hover:border-orange-500/40'
-                : 'bg-white hover:bg-gray-50 border border-orange-500/30 hover:border-orange-500/60 shadow-lg'
-                }`}
-            >
-              <Github size={20} />
-              GitHub
-            </a>
-            <a
-              href="https://linkedin.com/in/alancifuentessiliezar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 text-white"
-            >
-              <Linkedin size={20} />
-              LinkedIn
-            </a>
-            <a
-              href="mailto:a.fernando_cifuentes@yahoo.com"
-              className={`flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 font-medium ${isDarkMode ? 'text-gray-900' : 'text-white'}`}
-            >
-              <Mail size={20} />
-              {content[language].contactMe}
-            </a>
-          </div>
-          <div className="animate-bounce">
-            <ChevronDown size={32} className={isDarkMode ? "mx-auto text-gray-400" : "mx-auto text-gray-600"} />
+          <div className="mt-16 flex justify-center animate-bounce">
+            <ChevronDown size={28} className={isDarkMode ? "text-gray-500" : "text-gray-400"} />
           </div>
         </div>
       </section>
@@ -905,6 +933,30 @@ const Portfolio = () => {
                 } ${project.hasModal ? 'cursor-pointer' : ''}`}
                 onClick={() => project.hasModal && project.projectKey && openModal(project.projectKey)}
               >
+                {/* Preview image / placeholder */}
+                {(project as { preview?: string | null }).preview ? (
+                  <div className="w-full h-44 rounded-lg overflow-hidden mb-4 border border-orange-500/20">
+                    <img
+                      src={(project as { preview: string }).preview}
+                      alt={project.title}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                ) : (project as { flagship?: boolean }).flagship ? (
+                  <div className={`w-full h-32 rounded-lg mb-4 flex items-center justify-center overflow-hidden border border-orange-500/20 ${
+                    isDarkMode ? 'bg-gradient-to-br from-gray-700 to-gray-800' : 'bg-gradient-to-br from-orange-50 to-red-50'
+                  }`}>
+                    <div className="text-center">
+                      <div className="text-4xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent opacity-60">
+                        {project.title.charAt(0)}
+                      </div>
+                      <div className={`text-xs mt-1 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+                        {language === 'es' ? 'Sin captura disponible' : 'Preview not available'}
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
+
                 {/* Badges row */}
                 <div className="flex flex-wrap items-center gap-2 mb-3">
                   {(project as { flagship?: boolean }).flagship && (
@@ -940,13 +992,22 @@ const Portfolio = () => {
                 )}
 
                 <p className={`mb-4 leading-relaxed text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{project.description}</p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech, techIndex) => (
                     <span key={techIndex} className="bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/30 px-3 py-1 rounded-full text-xs text-red-300">
                       {tech}
                     </span>
                   ))}
                 </div>
+
+                {/* Action row */}
+                {project.hasModal && (
+                  <div className="flex items-center gap-3 mt-auto pt-2">
+                    <span className={`inline-flex items-center gap-1.5 text-xs ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+                      {language === 'es' ? 'Clic para detalles' : 'Click for details'}
+                    </span>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -1059,17 +1120,6 @@ const Portfolio = () => {
                 </div>
               )}
 
-              {/* Contador regresivo solo para proyectos con link */}
-              {projects.find(p => p.projectKey === selectedProject)?.link && (
-                <div className="text-center p-4 rounded-lg bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/30">
-                  <p className={`mb-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                    {content[language].redirectingIn}
-                  </p>
-                  <div className="text-4xl font-bold text-orange-500 animate-pulse">
-                    {countdown}
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Footer */}
@@ -1083,21 +1133,6 @@ const Portfolio = () => {
               >
                 {content[language].closeModal}
               </button>
-              {projects.find(p => p.projectKey === selectedProject)?.link && (
-                <button
-                  onClick={() => {
-                    const projectLink = projects.find(p => p.projectKey === selectedProject)?.link;
-                    if (projectLink) {
-                      window.open(projectLink, '_blank');
-                      closeModal();
-                    }
-                  }}
-                  className="flex-1 px-6 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white transition-all duration-300 flex items-center justify-center gap-2"
-                >
-                  {content[language].visitSite}
-                  <ExternalLink size={16} />
-                </button>
-              )}
             </div>
           </div>
         </div>
