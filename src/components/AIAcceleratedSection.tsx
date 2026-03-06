@@ -15,7 +15,7 @@ const content = {
     description: "Arquitecto y entrego sistemas production-grade usando flujos de trabajo asistidos por IA para alcanzar 3-4x la velocidad de desarrollo tradicional. Al integrar código generado por IA con estándares de ingeniería rigurosos, entrego proyectos complejos en días que típicamente requieren semanas.",
     stats: {
       velocity: { value: "3-4x", label: "Velocidad de Entrega", sublabel: "vs desarrollo tradicional" },
-      experience: { value: "3+", label: "Años", sublabel: "usando AI diariamente" },
+      experience: { value: "6+", label: "Años de Experiencia", sublabel: "AI-Assisted desde 2022" },
       reduction: { value: "85%", label: "Reducción", sublabel: "en tareas manuales" }
     },
     howIWork: {
@@ -56,7 +56,7 @@ const content = {
     description: "I architect and deliver production-grade systems using AI-assisted workflows to achieve 3-4x traditional development velocity. By expertly integrating AI-generated code with rigorous engineering standards, I deliver complex projects in days that typically require weeks.",
     stats: {
       velocity: { value: "3-4x", label: "Delivery Velocity", sublabel: "vs traditional dev" },
-      experience: { value: "3+", label: "Years", sublabel: "daily AI usage" },
+      experience: { value: "6+", label: "Years Experience", sublabel: "AI-Assisted since 2022" },
       reduction: { value: "85%", label: "Reduction", sublabel: "in manual tasks" }
     },
     howIWork: {

@@ -160,6 +160,8 @@ const Portfolio = () => {
   // Contenido multiidioma
   const content: Record<Language, {
     title: string;
+    subtitle: string;
+    openToRemote: string;
     about: string;
     aboutText1: string;
     aboutText2: string;
@@ -171,6 +173,7 @@ const Portfolio = () => {
     contactText: string;
     viewCode: string;
     connect: string;
+    contactMe: string;
     myHour: string;
     yourHour: string;
     ourHour: string;
@@ -211,81 +214,85 @@ const Portfolio = () => {
     privateProject: string;
     experienceData: {
       title: string;
+      company: string;
       period: string;
       description: string;
       highlights: string[];
     }[];
   }> = {
     es: {
-      title: "Senior Full Stack Engineer | Entregando Sistemas Production-Grade 3-4x Más Rápido con AI-Assisted Workflows",
+      title: "Senior Full Stack Engineer — Entrego sistemas production-grade 3-4x más rápido con AI-Assisted Workflows",
+      subtitle: "6+ años de experiencia Full Stack · Node.js · TypeScript · React/Next.js · PostgreSQL · AWS · AI-Assisted desde 2022",
+      openToRemote: "Disponible para roles remotos",
       about: "Sobre Mí",
-      aboutText1: "Ingeniero full stack con más de 8 años arquitectando plataformas e-commerce escalables y soluciones CMS personalizadas. Aprovecho flujos de trabajo AI-assisted para entregar proyectos complejos en días, no semanas.",
-      aboutText2: "Desde 2022, he estado a la vanguardia del desarrollo AI-assisted, integrando herramientas como Claude Code y GitHub Copilot en mi flujo diario. Esto no se trata de reemplazar habilidades de ingeniería, sino de multiplicar el output manteniendo los mismos estándares rigurosos.",
-      aboutText3: "Trato la AI como un multiplicador de fuerza: maneja el boilerplate y acelera la implementación, mientras yo me enfoco en arquitectura, seguridad, integración y production-readiness.",
+      aboutText1: "Ingeniero full stack con más de 6 años arquitectando plataformas e-commerce, sistemas de integración empresarial y aplicaciones de alta demanda. A lo largo de esa trayectoria he liderado proyectos con SAP, Shopify, facturación electrónica FEL y plataformas de alto tráfico.",
+      aboutText2: "Desde 2022 — sobre esa base de experiencia sólida — integro Claude Code y GitHub Copilot en mi flujo diario. No se trata de reemplazar criterio de ingeniería: se trata de multiplicar el output manteniendo los mismos estándares rigurosos de calidad y seguridad que construí en años de trabajo real.",
+      aboutText3: "El resultado: entrego en días lo que antes tomaba semanas, con la confianza de quien ha visto fallar sistemas en producción y sabe exactamente dónde poner los límites.",
       skills: "Habilidades Técnicas",
       experience: "Experiencia Profesional",
       projects: "Proyectos Destacados",
       contact: "¿Listo para colaborar?",
-      contactText: "Estoy disponible para nuevos proyectos y oportunidades. Si tienes una idea interesante o necesitas un desarrollador experimentado, ¡hablemos!",
+      contactText: "Disponible para roles remotos con empresas de US/Europa. Si tienes un proyecto interesante o buscas un ingeniero senior con experiencia real en AI-assisted development, hablemos.",
       viewCode: "Ver mi código",
-      connect: "Conectar",
-      myHour: "My hour",
-      yourHour: "Your local hour",
-      ourHour: "Our local hour",
+      connect: "Conectar en LinkedIn",
+      contactMe: "Contáctame",
+      myHour: "Mi hora",
+      yourHour: "Tu hora local",
+      ourHour: "Hora local (GT)",
       fullStack: "Desarrollo Full Stack",
       infrastructure: "Infraestructura & DevOps",
       projectManagement: "Gestión de Proyectos",
       technicalLeadership: "Liderazgo Técnico",
       projectTitles: {
-        businessManagement: "Sistema de Gestión Empresarial",
-        quotationPlatform: "Plataforma de Cotizaciones",
-        digitalSignatures: "Sistema de Firmas Digitales",
-        reactApps: "Aplicaciones React",
-        interactivePortfolio: "Portafolio Interactivo",
-        cinemaManagement: "Sistema de Gestión de Cine"
+        businessManagement: "Tiendy — Plataforma E-Commerce con FEL y Automatización de Envíos",
+        quotationPlatform: "ERP de Cotizaciones con Integración SAP Business One",
+        digitalSignatures: "Generador de Firmas Corporativas Multi-Empresa",
+        reactApps: "Suite de Apps React para Gestión de Espacios de Trabajo",
+        interactivePortfolio: "Portafolio con AI-Assisted Development en Producción",
+        cinemaManagement: "Alba Cinema — Plataforma de Reservas y Ticketing de Alta Demanda"
       },
       projectDescriptions: {
-        businessManagement: "Desarrollo de sistema completo de administración con integración a APIs externas, generación de reportes y gestión de usuarios.",
-        quotationPlatform: "Sistema conectado a APIs de SAP para obtener productos, costos y generar cotizaciones en PDF de forma automatizada.",
-        digitalSignatures: "Herramienta que obtiene datos de colaboradores vía API y genera firmas personalizadas para integración con Outlook.",
-        reactApps: "Desarrollo y modificación de aplicaciones para gestión de espacios, ordenamiento de parqueos y reservas de oficina.",
-        interactivePortfolio: "Desarrollo de este portafolio con integración de APIs en tiempo real, modo oscuro/claro y efectos avanzados de UI/UX.",
-        cinemaManagement: "Sistema de gestión y venta de butacas para cadena de cines nacional. Incluye mejoras en carrousel, filtros de selección y boletería por QR."
+        businessManagement: "Plataforma Shopify custom con integración de facturación electrónica FEL (SAT Guatemala), automatización de envíos multi-carrier y panel de administración. Reducción del 70% en tiempo de procesamiento de órdenes.",
+        quotationPlatform: "Sistema conectado en tiempo real a SAP Business One: sincronización de catálogo de productos, precios y clientes. Generación automática de cotizaciones en PDF. Tiempo de cotización reducido de 20 min a menos de 2 min.",
+        digitalSignatures: "Generación de firmas HTML personalizadas por colaborador y sub-empresa de multinacional. Desarrollo completo en Azure, compatible con Outlook. Cero configuración manual para +200 empleados.",
+        reactApps: "Tres aplicaciones React para gestión de espacios de oficina, parqueos y salas de reunión. Reducción del 40% en conflictos de reserva y eliminación de procesos manuales.",
+        interactivePortfolio: "Este portafolio — construido con Next.js y Tailwind CSS usando Claude Code como herramienta principal. Modo oscuro/claro, soporte bilingüe, animaciones y efectos avanzados de UI.",
+        cinemaManagement: "Plataforma de venta de butacas para cadena de cines nacional con múltiples proveedores de pago. Sistema de boletería QR, filtros avanzados de horarios y resolución de errores de pago en producción."
       },
       modalParticipation: "Mi Participación",
       modalChallenge: "El Reto",
       modalDetails: {
         businessManagement: [
-          "Heredar código sin documentación de un desarrollador previo",
-          "Solucionar errores críticos en sistema de producción bajo presión de tiempo",
-          "Corregir problemas que afectaban la atención a clientes",
-          "Optimizar la gestión interna de la empresa a través de la plataforma web",
-          "Implementar mejoras de seguridad y rendimiento",
-          "Crear documentación técnica del sistema para futuro mantenimiento"
+          "Integración de facturación electrónica FEL con el SAT de Guatemala directamente desde Shopify",
+          "Automatización de envíos con múltiples carriers (Guatex, DHL, pickup local) sin intervención manual",
+          "Dashboard de administración con control de inventario, órdenes y reportes en tiempo real",
+          "Reducción del 70% en tiempo de procesamiento de órdenes gracias a flujos automatizados",
+          "Desarrollo acelerado con Claude Code: sistema completo desplegado en semanas, no meses",
+          "Stack: Next.js, Node.js, PostgreSQL, Shopify API, FEL API"
         ],
         quotationPlatform: [
-          "Integración completa con APIs de SAP Business One",
-          "Implementación de métodos para generación automática de cotizaciones",
-          "Conexión en tiempo real con productos internos, clientes y precios",
-          "Desarrollo de sistema de generación de PDFs personalizados",
-          "Optimización de consultas para mejorar tiempos de respuesta",
-          "Implementación de caché para datos frecuentemente consultados"
+          "Integración bidireccional con SAP Business One: productos, clientes y precios en tiempo real",
+          "Generación automática de cotizaciones en PDF con branding personalizado por cliente",
+          "Implementación de caché inteligente para consultas frecuentes a SAP",
+          "Reducción de tiempo de cotización de 20 minutos a menos de 2 minutos",
+          "Sistema multiusuario con historial de cotizaciones y aprobaciones",
+          "Stack: PHP, JavaScript, SAP Business One API, PDF Generation"
         ],
         digitalSignatures: [
-          "Desarrollo desde cero del sistema completo",
-          "Acceso y configuración vía SSH al servidor Azure del cliente",
-          "Creación de endpoints personalizados para integración",
-          "Conexión directa con base de datos del cliente",
-          "Generación de firmas con colores específicos para cada sub-empresa",
-          "Sistema compatible con múltiples empresas de la multinacional",
-          "Exportación fácil y compatible con Outlook",
-          "Firmas interactivas y personalizadas para cada colaborador"
+          "Sistema completo desarrollado desde cero e instalado en servidor Azure del cliente vía SSH",
+          "Firmas HTML personalizadas por colaborador con colores y logos de cada sub-empresa",
+          "Compatible con Outlook sin configuración manual — exportación con un solo clic",
+          "Cubre 200+ empleados de múltiples empresas de la misma multinacional",
+          "API REST propia para integración con directorio de empleados del cliente",
+          "Stack: JavaScript, PHP, Azure, API REST, HTML/CSS avanzado"
         ],
         cinemaManagement: [
-          "Solucionar problemas en el carrusel principal",
-          "Agregar filtros especializados en la selección de butaca y los horarios de compra",
-          "Implementar el sistema de boletería por QR de manera eficiente",
-          "Mitigar errores de conexión con puntos de pago"
+          "Plataforma de alta demanda: múltiples funciones simultáneas con cientos de transacciones diarias",
+          "Sistema de boletería QR con validación en sala en tiempo real",
+          "Reconciliación de pagos con múltiples proveedores (Visa, Mastercard, pago en efectivo)",
+          "Filtros avanzados de selección de butaca por zona, accesibilidad y precio",
+          "Resolución de errores críticos de conexión con puntos de pago en producción",
+          "Stack: PHP, JavaScript, CSS, QR Integration, Payment APIs"
         ]
       },
       modalImages: {
@@ -297,95 +304,101 @@ const Portfolio = () => {
       privateProject: "Proyecto Privado",
       experienceData: [
         {
+          title: "Senior Full Stack Developer & Tech Lead",
+          company: "Aumenta GT",
+          period: "2022 — Presente",
+          description: "Arquitectura y desarrollo de plataformas e-commerce, sistemas de integración empresarial y aplicaciones de alta demanda. Pionero en adopción de AI-assisted workflows (Claude Code, GitHub Copilot) que redujeron los tiempos de entrega en 3-4x. Líder técnico en proyectos con integración a Shopify, SAP Business One y sistemas de facturación electrónica.",
+          highlights: ["Node.js · TypeScript · React/Next.js", "Shopify API · SAP Business One", "6+ años experiencia · AI-Assisted desde 2022", "FEL · Facturación Electrónica GT"]
+        },
+        {
+          title: "Full Stack Developer & Systems Integrator",
+          company: "Proyectos independientes / Clientes corporativos",
+          period: "2019 — 2022",
+          description: "Desarrollo de sistemas de gestión interna, integraciones con APIs empresariales y soluciones de automatización para empresas multinacionales. Creación de herramientas que eliminaron procesos manuales repetitivos y mejoraron eficiencia operativa.",
+          highlights: ["Integración SAP Business One", "Azure · SSH · APIs REST", "Firmas digitales corporativas", "Sistemas de cotización automática"]
+        },
+        {
           title: "Technology Project Manager & Full Stack Developer",
-          period: "8+ años de experiencia",
-          description: "Liderazgo de proyectos de infraestructura física de redes y comunicaciones, desarrollo de sistemas web complejos y gestión de equipos de desarrollo. Implementación de flujos AI-assisted para acelerar entregas.",
-          highlights: ["Gestión de proyectos tecnológicos", "Desarrollo de sistemas de administración", "Integración con APIs externas", "AI-Assisted Workflows"]
-        },
-        {
-          title: "Desarrollador Web Full Stack",
-          period: "Experiencia continua",
-          description: "Desarrollo y mantenimiento de aplicaciones web, rediseño de sitios, implementación de filtros dinámicos y mejoras de rendimiento usando herramientas AI modernas.",
-          highlights: ["Rediseño de interfaces web", "Integración con APIs", "Sistemas de cotización", "Optimización de rendimiento"]
-        },
-        {
-          title: "Especialista en Integración de Sistemas",
-          period: "Proyectos diversos",
-          description: "Conexión con sistemas empresariales como SAP, desarrollo de herramientas internas y automatización de procesos con asistencia de AI.",
-          highlights: ["Integración SAP", "Generación automática de documentos", "Sistemas de firma digital", "Automatización de procesos"]
+          company: "Sector corporativo — Guatemala",
+          period: "2017 — 2019",
+          description: "Liderazgo de proyectos de infraestructura de redes y comunicaciones. Desarrollo de aplicaciones web para gestión de espacios, parqueos y recursos de oficina. Coordinación de equipos técnicos y entrega de proyectos bajo presión.",
+          highlights: ["Gestión de proyectos tecnológicos", "React · JavaScript · PHP", "Infraestructura de redes", "Liderazgo técnico de equipos"]
         }
       ]
     },
     en: {
-      title: "Senior Full Stack Engineer | Delivering Production-Grade Systems 3-4x Faster with AI-Assisted Workflows",
+      title: "Senior Full Stack Engineer — Delivering production-grade systems 3-4x faster with AI-Assisted Workflows",
+      subtitle: "6+ years Full Stack experience · Node.js · TypeScript · React/Next.js · PostgreSQL · AWS · AI-Assisted since 2022",
+      openToRemote: "Open to remote opportunities",
       about: "About Me",
-      aboutText1: "Full stack engineer with 8+ years architecting scalable e-commerce platforms and custom CMS solutions. Leveraging AI-assisted workflows to deliver complex projects in days, not weeks.",
-      aboutText2: "Since 2022, I've been at the forefront of AI-assisted development, integrating tools like Claude Code and GitHub Copilot into my daily workflow. This isn't about replacing engineering skill—it's about multiplying output while maintaining rigorous standards.",
-      aboutText3: "I treat AI as a force multiplier: it handles boilerplate and accelerates implementation, while I focus on architecture, security, integration, and production-readiness.",
+      aboutText1: "Full stack engineer with 6+ years architecting e-commerce platforms, enterprise integration systems, and high-traffic applications. Throughout that career I've led projects involving SAP, Shopify, FEL electronic invoicing, and high-demand platforms.",
+      aboutText2: "Since 2022 — on top of that solid foundation — I've integrated Claude Code and GitHub Copilot into my daily workflow. This isn't about replacing engineering judgment: it's about multiplying output while maintaining the rigorous quality and security standards I built over years of real production work.",
+      aboutText3: "The result: I ship in days what used to take weeks, with the confidence of someone who has seen systems fail in production and knows exactly where to draw the line.",
       skills: "Technical Skills",
       experience: "Professional Experience",
       projects: "Featured Projects",
       contact: "Ready to collaborate?",
-      contactText: "I'm available for new projects and opportunities. If you have an interesting idea or need an experienced developer, let's talk!",
+      contactText: "Available for remote roles with US/European companies. If you have an interesting project or are looking for a senior engineer with real-world AI-assisted development experience, let's talk.",
       viewCode: "View my code",
-      connect: "Connect",
+      connect: "Connect on LinkedIn",
+      contactMe: "Contact Me",
       myHour: "My hour",
       yourHour: "Your local hour",
-      ourHour: "Alan local hour",
+      ourHour: "Alan's local hour",
       fullStack: "Full Stack Development",
       infrastructure: "Infrastructure & DevOps",
       projectManagement: "Project Management",
       technicalLeadership: "Technical Leadership",
       projectTitles: {
-        businessManagement: "Business Management System",
-        quotationPlatform: "Quotation Platform",
-        digitalSignatures: "Digital Signatures System",
-        reactApps: "React Applications",
-        interactivePortfolio: "Interactive Portfolio",
-        cinemaManagement: "Cinema Management System"
+        businessManagement: "Tiendy — Shopify E-Commerce with FEL Invoicing & Shipping Automation",
+        quotationPlatform: "SAP Business One Quotation Platform",
+        digitalSignatures: "Multi-Company Corporate Signature Generator",
+        reactApps: "React Workspace Management Suite",
+        interactivePortfolio: "Portfolio Built with AI-Assisted Development",
+        cinemaManagement: "Alba Cinema — High-Traffic Booking & Ticketing Platform"
       },
       projectDescriptions: {
-        businessManagement: "Development of complete administration system with external API integration, report generation and user management.",
-        quotationPlatform: "System connected to SAP APIs to obtain products, costs and generate automated PDF quotations.",
-        digitalSignatures: "Tool that obtains employee data via API and generates personalized signatures for Outlook integration.",
-        reactApps: "Development and modification of applications for space management, parking ordering and office reservations.",
-        interactivePortfolio: "Development of this portfolio with real-time API integration, dark/light mode and advanced UI/UX effects.",
-        cinemaManagement: "Seat management and sales system for a national cinema chain. Includes carousel improvements, selection filters and QR ticketing."
+        businessManagement: "Custom Shopify platform with FEL electronic invoicing (Guatemala SAT), multi-carrier shipping automation, and admin dashboard. Reduced order processing time by 70%.",
+        quotationPlatform: "Real-time SAP Business One integration: live product catalog, pricing, and customer sync. Automated PDF quotation generation. Reduced quote turnaround from 20 min to under 2 min.",
+        digitalSignatures: "Personalized HTML email signatures per employee and sub-company for a multinational. Built on Azure, Outlook-compatible. Zero manual setup for 200+ employees.",
+        reactApps: "Three React apps for office space, parking, and meeting room management. 40% reduction in booking conflicts and full elimination of manual coordination processes.",
+        interactivePortfolio: "This portfolio — built with Next.js and Tailwind CSS using Claude Code as the primary tool. Dark/light mode, bilingual support, animations, and advanced UI effects.",
+        cinemaManagement: "National cinema chain booking platform with multi-provider payment reconciliation. QR ticketing system, advanced schedule filters, and production payment error resolution."
       },
       modalParticipation: "My Participation",
       modalChallenge: "The Challenge",
       modalDetails: {
         businessManagement: [
-          "Inherit undocumented code from previous developer",
-          "Fix critical errors in production system under time pressure",
-          "Correct issues affecting customer service",
-          "Optimize internal company management through web platform",
-          "Implement security and performance improvements",
-          "Create technical documentation for future maintenance"
+          "FEL electronic invoicing integration with Guatemala SAT directly from Shopify",
+          "Multi-carrier shipping automation (Guatex, DHL, local pickup) with zero manual steps",
+          "Admin dashboard with real-time inventory, order management, and reporting",
+          "70% reduction in order processing time through automated workflows",
+          "Built with Claude Code: full system shipped in weeks, not months",
+          "Stack: Next.js, Node.js, PostgreSQL, Shopify API, FEL API"
         ],
         quotationPlatform: [
-          "Complete integration with SAP Business One APIs",
-          "Implementation of methods for automatic quotation generation",
-          "Real-time connection with internal products, customers and prices",
-          "Development of customized PDF generation system",
-          "Query optimization to improve response times",
-          "Cache implementation for frequently consulted data"
+          "Bidirectional SAP Business One integration: live products, customers, and pricing",
+          "Automated PDF quotation generation with per-client custom branding",
+          "Intelligent caching layer for frequent SAP queries",
+          "Quote turnaround reduced from 20 minutes to under 2 minutes",
+          "Multi-user system with quotation history and approval workflows",
+          "Stack: PHP, JavaScript, SAP Business One API, PDF Generation"
         ],
         digitalSignatures: [
-          "Complete system development from scratch",
-          "SSH access and configuration to client's Azure server",
-          "Creation of custom endpoints for integration",
-          "Direct connection with client database",
-          "Generation of signatures with specific colors for each sub-company",
-          "System compatible with multiple companies of the multinational",
-          "Easy export compatible with Outlook",
-          "Interactive and personalized signatures for each employee"
+          "Full system built from scratch and deployed on client's Azure server via SSH",
+          "Personalized HTML signatures per employee with per-company colors and logos",
+          "Outlook-compatible with one-click export — zero manual configuration",
+          "Covers 200+ employees across multiple companies in the same multinational",
+          "Custom REST API integrating with client's employee directory",
+          "Stack: JavaScript, PHP, Azure, REST API, Advanced HTML/CSS"
         ],
         cinemaManagement: [
-          "Fix issues in the main carousel",
-          "Add specialized filters for seat selection and purchase schedules",
-          "Implement efficient QR ticketing system",
-          "Mitigate connection errors with payment points"
+          "High-traffic platform: simultaneous screenings with hundreds of daily transactions",
+          "QR ticketing system with real-time in-venue validation",
+          "Payment reconciliation across multiple providers (Visa, Mastercard, cash)",
+          "Advanced seat selection filters by zone, accessibility, and price",
+          "Production payment connection error resolution with zero downtime",
+          "Stack: PHP, JavaScript, CSS, QR Integration, Payment APIs"
         ]
       },
       modalImages: {
@@ -397,32 +410,35 @@ const Portfolio = () => {
       privateProject: "Private Project",
       experienceData: [
         {
+          title: "Senior Full Stack Developer & Tech Lead",
+          company: "Aumenta GT",
+          period: "2022 — Present",
+          description: "Architecture and development of e-commerce platforms, enterprise integration systems, and high-traffic applications. Pioneer in AI-assisted workflows (Claude Code, GitHub Copilot) reducing delivery times by 3-4x. Technical lead on projects integrating Shopify, SAP Business One, and electronic invoicing systems.",
+          highlights: ["Node.js · TypeScript · React/Next.js", "Shopify API · SAP Business One", "6+ yrs experience · AI-Assisted since 2022", "FEL · Electronic Invoicing GT"]
+        },
+        {
+          title: "Full Stack Developer & Systems Integrator",
+          company: "Independent / Corporate Clients",
+          period: "2019 — 2022",
+          description: "Development of internal management systems, enterprise API integrations, and automation solutions for multinational companies. Built tools that eliminated repetitive manual processes and improved operational efficiency.",
+          highlights: ["SAP Business One Integration", "Azure · SSH · REST APIs", "Corporate Digital Signatures", "Automated Quotation Systems"]
+        },
+        {
           title: "Technology Project Manager & Full Stack Developer",
-          period: "8+ years of experience",
-          description: "Leadership of physical network and communications infrastructure projects, complex web systems development, and development team management. Implementing AI-assisted workflows to accelerate deliveries.",
-          highlights: ["Technology Project Management", "Administration Systems Development", "External API Integration", "AI-Assisted Workflows"]
-        },
-        {
-          title: "Full Stack Web Developer",
-          period: "Ongoing experience",
-          description: "Development and maintenance of web applications, site redesigns, dynamic filters implementation, and performance improvements using modern AI tools.",
-          highlights: ["Web Interface Redesign", "API Integration", "Quotation Systems", "Performance Optimization"]
-        },
-        {
-          title: "Systems Integration Specialist",
-          period: "Various projects",
-          description: "Connection with enterprise systems like SAP, internal tools development, and process automation with AI assistance.",
-          highlights: ["SAP Integration", "Automatic Document Generation", "Digital Signature Systems", "Process Automation"]
+          company: "Corporate sector — Guatemala",
+          period: "2017 — 2019",
+          description: "Led network and communications infrastructure projects. Developed web applications for space, parking, and office resource management. Coordinated technical teams and delivered projects under tight deadlines.",
+          highlights: ["Technology Project Management", "React · JavaScript · PHP", "Network Infrastructure", "Technical Team Leadership"]
         }
       ]
     }
   };
 
   const skills = [
-    { category: "Frontend", items: ["React", "Next.js", "JavaScript", "TypeScript", "Tailwind CSS", "HTML/CSS"] },
-    { category: "Backend", items: ["PHP", "Node.js", "Laravel", "API Integration", "SAP APIs", "Database Design"] },
-    { category: "Infrastructure", items: ["AWS", "Linode", "VPS", "SSH", "Domain Management", "Server Deployment"] },
-    { category: "AI-Assisted Dev", items: ["Claude Code (CLI)", "Claude API", "GitHub Copilot", "AI Workflows (3+ years)"], isAI: true }
+    { category: language === 'es' ? 'AI-Assisted Dev' : 'AI-Assisted Dev', items: ["Claude Code (CLI)", "Claude API", "GitHub Copilot", "Cursor", "AI Workflows (3+ yrs)"], isAI: true },
+    { category: "Frontend", items: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "HTML/CSS"] },
+    { category: "Backend", items: ["Node.js", "TypeScript", "NestJS", "PostgreSQL", "GraphQL", "REST APIs", "SAP APIs"] },
+    { category: "Infrastructure", items: ["AWS Lambda", "Serverless", "Docker", "Linode/VPS", "CI/CD", "SSH"] },
   ];
 
   // Experience now comes from content[language].experienceData
@@ -431,49 +447,56 @@ const Portfolio = () => {
     {
       title: content[language].projectTitles.businessManagement,
       description: content[language].projectDescriptions.businessManagement,
-      tech: ["PHP", "JavaScript", "CSS", "API Integration"],
+      tech: ["Next.js", "Node.js", "PostgreSQL", "Shopify API", "FEL API"],
       hasModal: true,
       projectKey: 'businessManagement',
       isPrivate: true,
-      aiBadge: null
+      flagship: true,
+      metric: language === 'es' ? '70% menos tiempo por orden' : '70% faster order processing',
+      aiBadge: { type: 'accelerated', label: 'AI-Accelerated' }
+    },
+    {
+      title: content[language].projectTitles.cinemaManagement,
+      description: content[language].projectDescriptions.cinemaManagement,
+      tech: ["PHP", "JavaScript", "QR Integration", "Payment APIs"],
+      link: "https://albacinema.com.gt/",
+      hasModal: true,
+      projectKey: 'cinemaManagement',
+      flagship: true,
+      metric: language === 'es' ? 'Cientos de transacciones/día' : 'Hundreds of daily transactions',
+      aiBadge: { type: 'performance', label: 'High-Performance' }
     },
     {
       title: content[language].projectTitles.quotationPlatform,
       description: content[language].projectDescriptions.quotationPlatform,
-      tech: ["PHP", "JavaScript", "SAP API", "PDF Generation"],
+      tech: ["PHP", "JavaScript", "SAP Business One API", "PDF Generation"],
       hasModal: true,
       projectKey: 'quotationPlatform',
       hasImages: true,
-      aiBadge: { type: 'accelerated', label: language === 'es' ? 'AI-Accelerated' : 'AI-Accelerated' }
+      metric: language === 'es' ? '20 min → menos de 2 min por cotización' : '20 min → under 2 min per quote',
+      aiBadge: { type: 'accelerated', label: 'AI-Accelerated' }
     },
     {
       title: content[language].projectTitles.digitalSignatures,
       description: content[language].projectDescriptions.digitalSignatures,
-      tech: ["JavaScript", "PHP", "CSS", "API Integration"],
+      tech: ["JavaScript", "PHP", "Azure", "REST API"],
       hasModal: true,
       projectKey: 'digitalSignatures',
-      aiBadge: { type: 'enhanced', label: language === 'es' ? 'AI-Enhanced' : 'AI-Enhanced' }
+      metric: language === 'es' ? '200+ empleados, cero configuración manual' : '200+ employees, zero manual setup',
+      aiBadge: { type: 'enhanced', label: 'AI-Enhanced' }
     },
     {
       title: content[language].projectTitles.reactApps,
       description: content[language].projectDescriptions.reactApps,
-      tech: ["React", "JavaScript", "CSS"],
+      tech: ["React", "TypeScript", "JavaScript"],
+      metric: language === 'es' ? '40% menos conflictos de reserva' : '40% fewer booking conflicts',
       aiBadge: null
     },
     {
       title: content[language].projectTitles.interactivePortfolio,
       description: content[language].projectDescriptions.interactivePortfolio,
-      tech: ["Next.js", "React", "Tailwind CSS", "Claude Code"],
-      aiBadge: { type: 'accelerated', label: language === 'es' ? 'AI-Accelerated' : 'AI-Accelerated' }
-    },
-    {
-      title: content[language].projectTitles.cinemaManagement,
-      description: content[language].projectDescriptions.cinemaManagement,
-      tech: ["PHP", "JavaScript", "CSS", "QR Integration"],
-      link: "https://albacinema.com.gt/",
-      hasModal: true,
-      projectKey: 'cinemaManagement',
-      aiBadge: { type: 'performance', label: language === 'es' ? 'High-Performance' : 'High-Performance' }
+      tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Claude Code"],
+      aiBadge: { type: 'accelerated', label: 'AI-Accelerated' }
     }
   ];
 
@@ -704,13 +727,26 @@ const Portfolio = () => {
             />
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 bg-clip-text text-transparent">
+          <h1 className="text-6xl md:text-8xl font-bold mb-4 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 bg-clip-text text-transparent">
             Alan Cifuentes
           </h1>
-          <p className={`text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+          <p className={`text-xl md:text-2xl mb-3 max-w-3xl mx-auto leading-relaxed font-medium ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
             {content[language].title}
           </p>
-          <div className="flex flex-wrap justify-center gap-6 mb-12">
+          <p className={`text-base md:text-lg mb-5 max-w-2xl mx-auto ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+            {content[language].subtitle}
+          </p>
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/15 border border-green-500/40 text-green-400 text-sm font-medium">
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              {content[language].openToRemote}
+            </span>
+            <span className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-gray-800 border border-gray-700 text-gray-300' : 'bg-white border border-gray-200 text-gray-600 shadow-sm'}`}>
+              <MapPin size={14} className="text-orange-400" />
+              Guatemala — Remote
+            </span>
+          </div>
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
             <a
               href="https://github.com/SoulAlan"
               target="_blank"
@@ -733,12 +769,11 @@ const Portfolio = () => {
               LinkedIn
             </a>
             <a
-              href="mailto: a.fernando_cifuentes@yahoo.com"
-              className={`flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 font-medium ${isDarkMode ? 'text-gray-900' : 'text-white'
-                }`}
+              href="mailto:a.fernando_cifuentes@yahoo.com"
+              className={`flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 font-medium ${isDarkMode ? 'text-gray-900' : 'text-white'}`}
             >
               <Mail size={20} />
-              Contacto
+              {content[language].contactMe}
             </a>
           </div>
           <div className="animate-bounce">
@@ -830,9 +865,12 @@ const Portfolio = () => {
                 ? 'bg-gray-800/30 border-gray-700 hover:border-orange-500'
                 : 'bg-white border-gray-200 hover:border-orange-500 shadow-lg hover:shadow-xl'
                 }`}>
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <h3 className="text-2xl font-semibold text-orange-400">{exp.title}</h3>
-                  <span className={`md:text-right ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{exp.period}</span>
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4 gap-1">
+                  <div>
+                    <h3 className="text-xl font-semibold text-orange-400">{exp.title}</h3>
+                    <p className={`text-sm font-medium mt-0.5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{exp.company}</p>
+                  </div>
+                  <span className={`text-sm shrink-0 mt-1 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{exp.period}</span>
                 </div>
                 <p className={`mb-4 leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{exp.description}</p>
                 <div className="flex flex-wrap gap-2">
@@ -856,15 +894,25 @@ const Portfolio = () => {
             {projects.map((project, index) => (
               <div
                 key={index}
-                className={`p-6 rounded-lg transition-all duration-300 group border hover:scale-105 ${isDarkMode
-                  ? 'bg-gray-800 hover:bg-gray-700 border-orange-500/20 hover:border-orange-500/40'
-                  : 'bg-white hover:bg-gray-50 border-orange-500/30 hover:border-orange-500/60 shadow-lg hover:shadow-xl'
-                  } ${project.hasModal ? 'cursor-pointer' : ''}`}
+                className={`p-6 rounded-lg transition-all duration-300 group border hover:scale-105 ${
+                  (project as { flagship?: boolean }).flagship
+                    ? isDarkMode
+                      ? 'bg-gray-800 border-orange-500/50 hover:border-orange-500 shadow-lg shadow-orange-500/10'
+                      : 'bg-white border-orange-500/60 hover:border-orange-500 shadow-lg shadow-orange-500/10 hover:shadow-xl'
+                    : isDarkMode
+                      ? 'bg-gray-800 hover:bg-gray-700 border-orange-500/20 hover:border-orange-500/40'
+                      : 'bg-white hover:bg-gray-50 border-orange-500/30 hover:border-orange-500/60 shadow-lg hover:shadow-xl'
+                } ${project.hasModal ? 'cursor-pointer' : ''}`}
                 onClick={() => project.hasModal && project.projectKey && openModal(project.projectKey)}
               >
-                {/* AI Badge */}
-                {project.aiBadge && (
-                  <div className="mb-3">
+                {/* Badges row */}
+                <div className="flex flex-wrap items-center gap-2 mb-3">
+                  {(project as { flagship?: boolean }).flagship && (
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-orange-500 to-red-500 text-white">
+                      Flagship
+                    </span>
+                  )}
+                  {project.aiBadge && (
                     <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${
                       project.aiBadge.type === 'accelerated'
                         ? 'bg-gradient-to-r from-orange-500/20 to-red-500/20 text-orange-400 border border-orange-500/30'
@@ -877,15 +925,24 @@ const Portfolio = () => {
                       {project.aiBadge.type === 'performance' && <Zap size={12} />}
                       {project.aiBadge.label}
                     </span>
-                  </div>
-                )}
-                <h3 className="text-xl font-semibold mb-3 text-orange-400 group-hover:text-orange-300">
+                  )}
+                </div>
+
+                <h3 className="text-xl font-semibold mb-2 text-orange-400 group-hover:text-orange-300">
                   {project.title}
                 </h3>
-                <p className={`mb-4 leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{project.description}</p>
+
+                {/* Impact metric */}
+                {(project as { metric?: string }).metric && (
+                  <p className={`text-sm font-medium mb-3 ${isDarkMode ? 'text-green-400' : 'text-green-600'}`}>
+                    &#8599; {(project as { metric?: string }).metric}
+                  </p>
+                )}
+
+                <p className={`mb-4 leading-relaxed text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{project.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((tech, techIndex) => (
-                    <span key={techIndex} className="bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/30 px-3 py-1 rounded-full text-sm text-red-300">
+                    <span key={techIndex} className="bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/30 px-3 py-1 rounded-full text-xs text-red-300">
                       {tech}
                     </span>
                   ))}
@@ -899,11 +956,35 @@ const Portfolio = () => {
       {/* Contact Section */}
       <section className="py-20 px-4 relative z-20">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent">{content[language].contact}</h2>
-          <p className={`text-xl mb-12 max-w-2xl mx-auto ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/15 border border-green-500/40 text-green-400 text-sm font-medium mb-6">
+            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+            {content[language].openToRemote}
+          </div>
+          <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent">{content[language].contact}</h2>
+          <p className={`text-xl mb-10 max-w-2xl mx-auto ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
             {content[language].contactText}
           </p>
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
+              href="mailto:a.fernando_cifuentes@yahoo.com"
+              className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 text-white font-medium"
+            >
+              <Mail size={20} />
+              {content[language].contactMe}
+            </a>
+            <a
+              href="https://linkedin.com/in/alancifuentessiliezar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex items-center gap-2 px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 ${isDarkMode
+                ? 'bg-gray-800 hover:bg-gray-700 border border-orange-500/20 hover:border-orange-500/40'
+                : 'bg-white hover:bg-gray-50 border border-orange-500/30 hover:border-orange-500/60 shadow-lg'
+              }`}
+            >
+              <Linkedin size={20} />
+              {content[language].connect}
+              <ExternalLink size={16} />
+            </a>
             <a
               href="https://github.com/SoulAlan"
               target="_blank"
@@ -911,20 +992,10 @@ const Portfolio = () => {
               className={`flex items-center gap-2 px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 ${isDarkMode
                 ? 'bg-gray-800 hover:bg-gray-700 border border-orange-500/20 hover:border-orange-500/40'
                 : 'bg-white hover:bg-gray-50 border border-orange-500/30 hover:border-orange-500/60 shadow-lg'
-                }`}
+              }`}
             >
-              <Github size={24} />
+              <Github size={20} />
               {content[language].viewCode}
-              <ExternalLink size={16} />
-            </a>
-            <a
-              href="https://linkedin.com/in/alancifuentessiliezar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 text-white"
-            >
-              <Linkedin size={24} />
-              {content[language].connect}
               <ExternalLink size={16} />
             </a>
           </div>
@@ -1037,7 +1108,7 @@ const Portfolio = () => {
         }`}>
         <div className="max-w-4xl mx-auto text-center">
           <p className={isDarkMode ? 'text-gray-400' : 'text-gray-600'}>
-            © 2025 Alan Cifuentes. Desarrollado con Next.js y Tailwind CSS.
+            © 2026 Alan Cifuentes. {language === 'es' ? 'Desarrollado con' : 'Built with'} Next.js · Tailwind CSS · Claude Code
           </p>
         </div>
       </footer>
