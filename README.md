@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# alancifuentes.com
 
-## Getting Started
+Personal portfolio — Next.js 16 (App Router), Tailwind CSS 4, deployed on Vercel.
 
-First, run the development server:
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`/` redirects to `/en` or `/es` based on the browser language (English by default).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Where things live
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| What | File |
+| --- | --- |
+| Domain, email, social links, photo, CV and booking links | `src/content/site.ts` |
+| All page copy (EN + ES), projects and skills | `src/content/dictionaries.ts` |
+| Extra facts for the AI assistant and `llms.txt` | `src/content/knowledge.ts` (`extraFacts`) |
+| Case study pages | `src/app/[locale]/projects/[slug]/page.tsx` |
+| AI assistant API | `src/app/api/chat/route.ts` |
+| Contact form API | `src/app/api/contact/route.ts` |
 
-## Learn More
+Case study sections `challenge`, `architecture`, `decisions` and `results` are optional per project and only render when filled in.
 
-To learn more about Next.js, take a look at the following resources:
+## Environment variables (set in Vercel)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Variable | Used by | Notes |
+| --- | --- | --- |
+| `GROQ_API_KEY` | AI assistant | Free key from console.groq.com. Without it `/api/chat` returns 503 and the widget shows the email instead. |
+| `RESEND_API_KEY` | Contact form | Provided by the Resend integration. |
+| `CONTACT_FROM_EMAIL` | Contact form | Sender on a domain verified in Resend, e.g. `Portfolio <contact@alancifuentes.com>`. |
+| `CONTACT_TO_EMAIL` | Contact form | Optional; defaults to the email in `site.ts`. |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Run `vercel env pull` to copy them into `.env.local` for local testing.

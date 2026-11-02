@@ -1,27 +1,28 @@
 'use client';
 
 import React, { useState } from 'react';
+import type { Locale } from '@/content/site';
 import { Zap, Clock, Target, ChevronDown, ChevronUp, Cpu, GitBranch, Shield, Rocket } from 'lucide-react';
 
 interface AIAcceleratedSectionProps {
   isDarkMode: boolean;
-  language: 'es' | 'en';
+  language: Locale;
 }
 
 const content = {
   es: {
-    sectionTitle: "Desarrollo con AI-Accelerated Workflows",
-    headline: "Velocidad de Entrega Acelerada, Calidad Sin Compromisos",
-    description: "Arquitecto y entrego sistemas production-grade usando flujos de trabajo asistidos por IA para alcanzar 3-4x la velocidad de desarrollo tradicional. Al integrar código generado por IA con estándares de ingeniería rigurosos, entrego proyectos complejos en días que típicamente requieren semanas.",
+    sectionTitle: "Desarrollo acelerado con IA",
+    headline: "Entrega acelerada, calidad sin concesiones",
+    description: "Diseño y entrego sistemas listos para producción con flujos de trabajo asistidos por IA, a 3-4x la velocidad del desarrollo tradicional. Al combinar código generado por IA con estándares de ingeniería rigurosos, entrego en días proyectos complejos que normalmente requieren semanas.",
     stats: {
-      velocity: { value: "3-4x", label: "Velocidad de Entrega", sublabel: "vs desarrollo tradicional" },
-      experience: { value: "6+", label: "Años de Experiencia", sublabel: "AI-Assisted desde 2022" },
+      velocity: { value: "3-4x", label: "Velocidad de entrega", sublabel: "vs desarrollo tradicional" },
+      experience: { value: "6+", label: "Años de experiencia", sublabel: "Asistido por IA desde 2022" },
       reduction: { value: "85%", label: "Reducción", sublabel: "en tareas manuales" }
     },
     howIWork: {
-      title: "Cómo Trabajo con AI",
+      title: "Cómo trabajo con IA",
       tools: {
-        title: "Herramientas AI en Mi Stack",
+        title: "Herramientas de IA que uso",
         items: [
           { name: "Claude Code (CLI)", desc: "Arquitectura y lógica compleja" },
           { name: "Claude API", desc: "Generación y refactorización de código" },
@@ -29,26 +30,26 @@ const content = {
         ]
       },
       process: {
-        title: "Mi Proceso",
+        title: "Mi proceso",
         steps: [
           { icon: "design", title: "Diseño", desc: "Arquitecto el sistema y defino requisitos" },
-          { icon: "generate", title: "Genero", desc: "AI acelera la creación de código" },
+          { icon: "generate", title: "Genero", desc: "La IA acelera la creación de código" },
           { icon: "integrate", title: "Integro", desc: "Reviso, refactorizo y conecto componentes" },
           { icon: "harden", title: "Fortifico", desc: "Seguridad, rendimiento y edge cases" },
-          { icon: "deploy", title: "Despliego", desc: "Código production-ready con tests" }
+          { icon: "deploy", title: "Despliego", desc: "Código listo para producción con pruebas" }
         ]
       },
       benefits: {
-        title: "Por Qué Importa",
+        title: "Por qué importa",
         items: [
-          "Entrega más rápida de MVP para validación",
+          "Entrega más rápida del MVP para validarlo",
           "Más tiempo para arquitectura y optimización",
-          "Menos boilerplate, más lógica de negocio",
-          "Mismos estándares de calidad, timeline acelerado"
+          "Menos código repetitivo, más lógica de negocio",
+          "Los mismos estándares de calidad, en menos tiempo"
         ]
       }
     },
-    expandButton: { show: "Ver cómo trabajo con AI", hide: "Ocultar detalles" }
+    expandButton: { show: "Ver cómo trabajo con IA", hide: "Ocultar detalles" }
   },
   en: {
     sectionTitle: "AI-Accelerated Development",
@@ -213,6 +214,7 @@ const AIAcceleratedSection: React.FC<AIAcceleratedSectionProps> = ({ isDarkMode,
           {/* Toggle Button */}
           <button
             onClick={() => setIsExpanded(!isExpanded)}
+            aria-expanded={isExpanded}
             className={`w-full p-6 flex items-center justify-between transition-all duration-300 ${
               isDarkMode
                 ? 'hover:bg-gray-700/50'
