@@ -16,6 +16,10 @@ interface ProjectBase {
   isPrivate?: boolean;
   badge?: BadgeType;
   images?: ProjectImage[];
+  // Public URL of the live project, shown as a "Visit site" link.
+  url?: string;
+  // The URL opens a sign-in screen, so the link says so instead of promising a public site.
+  urlRequiresLogin?: boolean;
 }
 
 interface ProjectText {
@@ -35,6 +39,28 @@ interface ProjectText {
 export type Project = ProjectBase & ProjectText;
 
 const projectBase: ProjectBase[] = [
+  {
+    slug: 'adventist-church-guatemala',
+    tech: ['Next.js', 'React', 'TypeScript', 'Prisma', 'MariaDB', 'NextAuth', 'TipTap', 'Leaflet', 'Live audio streaming'],
+    flagship: true,
+    url: 'https://adventistas.org.gt/',
+  },
+  {
+    slug: 'manyconnect-lead-routing',
+    tech: ['Next.js', 'TypeScript', 'Supabase (Postgres)', 'Vercel Cron', 'ManyChat API', 'Meta Ads API', 'MCP', 'OAuth'],
+    flagship: true,
+    badge: 'enhanced',
+    url: 'https://manyconnect.aumenta.do',
+    urlRequiresLogin: true,
+  },
+  {
+    slug: 'morpheus-whatsapp-platform',
+    tech: ['Next.js 16', 'Fastify', 'PostgreSQL', 'Zod', 'WhatsApp Cloud API', 'Groq · Claude · OpenAI · Gemini', 'n8n', 'Docker'],
+    flagship: true,
+    badge: 'enhanced',
+    url: 'https://morpheus-pied.vercel.app/admin',
+    urlRequiresLogin: true,
+  },
   {
     slug: 'shopify-fel-ecommerce',
     tech: ['Next.js', 'Node.js', 'PostgreSQL', 'Shopify API', 'FEL API'],
@@ -68,6 +94,11 @@ const projectBase: ProjectBase[] = [
     ],
   },
   {
+    slug: 'luzea-real-estate-landing',
+    tech: ['Next.js', 'React', 'TypeScript', 'Motion', 'schema.org', 'Google Tag Manager', 'Webhooks'],
+    url: 'https://proyectos.luzeaapartamentos.gt/',
+  },
+  {
     slug: 'corporate-email-signatures',
     tech: ['JavaScript', 'PHP', 'Azure', 'REST API'],
     badge: 'enhanced',
@@ -85,6 +116,90 @@ const projectBase: ProjectBase[] = [
 
 const projectText: Record<Locale, Record<string, ProjectText>> = {
   en: {
+    'adventist-church-guatemala': {
+      title: 'Seventh-day Adventist Church in Guatemala — National Platform',
+      summary: "Official site of the Seventh-day Adventist Church in Guatemala (Guatemalan Union, Inter-American Division), built to the church's worldwide brand guidelines. A custom CMS, live radio streaming, and a national access network that mirrors the church's structure from country down to each local congregation.",
+      metric: 'Live at adventistas.org.gt',
+      challenge: "The church needed one official platform for the whole country that follows the worldwide Adventist identity to the letter, lets each level of the organization manage only its own content, and stays simple for volunteers with no technical background.",
+      details: [
+        "Public site built to the worldwide Adventist brand guidelines: official logo and symbol, brand color accents, and the identity's signature seventh column on every public page",
+        'Custom CMS with a rich-text editor for news, official announcements with read tracking, notifications, image galleries, pastors, churches, clubs, and events',
+        'Live radio player for Unión Radio GT and Orión Stereo that keeps playing while visitors navigate and remembers station, volume, and pause preferences',
+        'Church finder with an interactive map, worship schedules, and pastor profiles for every congregation',
+        'Prayer requests with optional pastoral visits, routed to the district responsible for each request',
+        'Online sign-up for youth clubs (Pathfinders) and church secretariat tools: board, votes, and attendance records',
+      ],
+      architecture: [
+        'National hierarchy in the data model: country → associations → districts → pastors → churches, with clubs, Growth Groups, and secretariat records under each church',
+        'Access network with five roles (super admin, general admin, district admin, club admin, church secretary), each scoped to the entities it is assigned to',
+        'Next.js App Router with Prisma on MariaDB; admin area and APIs protected by NextAuth v5 with JWT in httpOnly cookies',
+      ],
+      decisions: [
+        'No public login button: staff sign in from a private URL, with bcrypt-hashed passwords and IP lockout after five failed attempts',
+        'Admin screens use their own full-width layout, while every public page keeps the brand-mandated seventh column',
+        "The seventh column's palette follows the visitor's time of day (dawn, day, dusk, night) to keep the identity alive without breaking the guidelines",
+        'Production builds run locally and are shipped to the Node.js host behind an Apache proxy, avoiding the shared host’s build limits',
+      ],
+    },
+    'manyconnect-lead-routing': {
+      title: 'ManyConnect — Lead Routing for WhatsApp Sales Teams',
+      summary: "Built for Aumenta (professional services contract). Multi-tenant platform that assigns every WhatsApp lead coming from ManyChat to the right sales advisor in seconds, reassigns it if nobody replies in 5 minutes, and gives each brand dashboards on how its team responds and sells.",
+      metric: 'Unattended leads reassigned after 5 minutes',
+      challenge: 'Brands running ads to WhatsApp were losing leads: chats sat unanswered, advisors were picked by hand, and nobody could see which campaigns or advisors actually closed sales.',
+      details: [
+        'Round-robin assignment by department and branch, with fallback pools when a department has nobody available',
+        'Automatic reassignment when an advisor does not respond within 5 minutes, plus a queue that releases leads when business hours start',
+        'Advisors set themselves available from WhatsApp; the system tracks lead stages and flags stuck leads on a Kanban board',
+        'Analytics dashboards for paid vs. organic leads, advisor response times, and lead models, with Excel exports',
+        'Hourly Meta Ads sync to tie leads back to the campaigns that generated them',
+        'MCP connector for claude.ai with OAuth sign-in, read-only tools, and audited actions, so managers can query and operate the system from Claude',
+      ],
+      architecture: [
+        'Next.js App Router API on Vercel with Supabase Postgres; a database function performs the round-robin pick atomically',
+        'Multi-tenant: every operational table carries tenant_id, and outbound ManyChat calls use each brand’s own credentials',
+        'Vercel Cron jobs every few minutes for reassignment, auditing, and stuck-lead recovery, plus daily digests',
+      ],
+      decisions: [
+        'Cron reassignments send only ids and re-confirm the advisor before firing, after fixing a race condition that misattributed organic leads',
+        'Demo tenants with fictitious brands and a simulated inbox, so the sales team can present the product without exposing client data',
+      ],
+    },
+    'morpheus-whatsapp-platform': {
+      title: 'Morpheus — Multi-Tenant WhatsApp Customer Service Platform with AI',
+      summary: "Built for Aumenta (professional services contract); in active development. A SaaS where an AI assistant answers customers on WhatsApp instantly, hands them to the right advisor, and shows the business in real time who is waiting, how fast the team replies, and which conversations end in a sale. It grew out of ChatCenter, its alpha version (an in-house WhatsApp inbox with an AI bot), and absorbs ManyConnect’s lead routing, removing the dependency on ManyChat.",
+      metric: 'Each business picks Groq, Claude, OpenAI, or Gemini',
+      details: [
+        'Own WhatsApp channel on the Meta Cloud API: inbound and outbound messages, attachments, approved templates, and bulk sends from Excel',
+        'Real-time shared inbox with assignment, notes, tags, quick replies, and chat states (pending, attended, closed, sold, lost with reason)',
+        'Visual flow builder: keyword, ad, and button triggers, questions that save data, conditions, live testing on your own WhatsApp, and drop-off metrics per step',
+        'AI assistant that answers by intent and routes to areas such as Sales or HR; each business uses the platform’s AI or its own key, with token usage tracked per business',
+        'Business hours, percentage-based automatic distribution, and backup advisors per area',
+        'Reports with period comparison and Excel export; mobile app designed in Figma in Spanish and English',
+      ],
+      architecture: [
+        'Monorepo: Fastify API with OpenAPI docs, Next.js 16 web app, and a shared package with roles, Zod schemas, and a typed HTTP client used by web and the upcoming mobile app',
+        'Every business resource lives under /v1/tenants/:tenantId and is filtered by tenant_id in SQL; row-level security is enabled on every table',
+        'Real-time updates over Server-Sent Events that carry only ids, so clients re-fetch with their own permissions',
+        'Plain SQL migrations applied on startup; deployed with Docker Compose on a VPS, with n8n as an optional automation backend',
+      ],
+      decisions: [
+        'API contract first: Zod schema, then route, then client method — the UI never calls fetch by hand',
+        'Permissions defined once and checked the same way in the API and the UI, with per-person exceptions on top of roles',
+        'Chats handled by the bot stay out of advisors’ queues until they are handed to a person, so the team only sees conversations that need a human',
+      ],
+    },
+    'luzea-real-estate-landing': {
+      title: 'Luzea Apartments — Real Estate Landing Page',
+      summary: 'Built for Aumenta (professional services contract). Sales landing page for an apartment complex in San José Pinula, Guatemala, built from the Figma design in about a week, with SEO structured data, analytics, and lead capture wired to the sales team’s automations.',
+      metric: 'Built from the Figma design in about a week',
+      details: [
+        'Pixel-faithful build of the Figma design, responsive down to small phones, with motion on key sections',
+        'Content blocks that help buyers decide: house vs. apartment comparison, FAQ, unit models, and amenities',
+        '"Schedule a visit" modal that carries the apartment model the visitor was looking at, plus a budget-qualifying lead form',
+        'Leads sent by webhook to the sales team’s automation workflows',
+        'schema.org ApartmentComplex and FAQPage data, Open Graph image, sitemap, and Google Tag Manager for campaign tracking',
+      ],
+    },
     'shopify-fel-ecommerce': {
       title: 'Shopify E-Commerce Platform with FEL Invoicing & Shipping Automation',
       summary: 'Custom Shopify platform with FEL electronic invoicing (Guatemala SAT), multi-carrier shipping automation, and admin dashboard. Reduced order processing time by 70%.',
@@ -155,6 +270,90 @@ const projectText: Record<Locale, Record<string, ProjectText>> = {
     },
   },
   es: {
+    'adventist-church-guatemala': {
+      title: 'Iglesia Adventista del Séptimo Día en Guatemala — Plataforma Nacional',
+      summary: 'Sitio oficial de la Iglesia Adventista del Séptimo Día en Guatemala (Unión Guatemalteca, División Interamericana), construido siguiendo los lineamientos de marca de la iglesia a nivel mundial. CMS a medida, radio en vivo y una red de acceso nacional que replica la estructura de la iglesia, desde el país hasta cada congregación local.',
+      metric: 'En producción en adventistas.org.gt',
+      challenge: 'La iglesia necesitaba una sola plataforma oficial para todo el país que respetara al pie de la letra la identidad adventista mundial, que permitiera a cada nivel de la organización administrar solo su propio contenido y que fuera sencilla para voluntarios sin conocimientos técnicos.',
+      details: [
+        'Sitio público alineado a los lineamientos de marca adventista a nivel mundial: logotipo y símbolo oficiales, acentos de color de la marca y la séptima columna característica de la identidad en cada página pública',
+        'CMS a medida con editor de texto enriquecido para noticias, comunicados oficiales con control de lectura, notificaciones, galerías, pastores, iglesias, clubes y eventos',
+        'Reproductor de radio en vivo para Unión Radio GT y Orión Stereo que sigue sonando mientras se navega y recuerda la emisora, el volumen y si el visitante lo pausó',
+        'Buscador de iglesias con mapa interactivo, horarios de culto y perfil del pastor de cada congregación',
+        'Peticiones de oración con opción de visita pastoral, dirigidas al distrito responsable de cada solicitud',
+        'Inscripción en línea a clubes juveniles (Conquistadores) y herramientas de secretaría: junta, votos y registro de asistencia',
+      ],
+      architecture: [
+        'Jerarquía nacional en el modelo de datos: país → asociaciones → distritos → pastores → iglesias, con clubes, Grupos en Crecimiento y registros de secretaría bajo cada iglesia',
+        'Red de acceso con cinco roles (super administrador, administrador general, administrador de distrito, administrador de club y secretaría de iglesia), cada uno limitado a las entidades que tiene asignadas',
+        'Next.js App Router con Prisma sobre MariaDB; panel y APIs protegidos con NextAuth v5 y JWT en cookies httpOnly',
+      ],
+      decisions: [
+        'Sin botón público de inicio de sesión: el personal entra desde una URL privada, con contraseñas cifradas con bcrypt y bloqueo por IP tras cinco intentos fallidos',
+        'Las pantallas de administración usan su propio diseño a pantalla completa, mientras cada página pública conserva la séptima columna que exige la marca',
+        'La paleta de la séptima columna cambia según la hora del visitante (amanecer, día, atardecer, noche) para darle vida a la identidad sin romper los lineamientos',
+        'La compilación de producción se hace en local y se publica al servidor Node.js detrás de un proxy Apache, evitando los límites del hosting compartido',
+      ],
+    },
+    'manyconnect-lead-routing': {
+      title: 'ManyConnect — Asignación de Leads para Equipos de Venta por WhatsApp',
+      summary: 'Desarrollado para Aumenta (contrato de servicios profesionales). Plataforma multiempresa que asigna en segundos cada lead de WhatsApp que llega desde ManyChat al asesor correcto, lo reasigna si nadie responde en 5 minutos y le da a cada marca tableros sobre cómo responde y vende su equipo.',
+      metric: 'Leads sin atender reasignados a los 5 minutos',
+      challenge: 'Las marcas que pautaban hacia WhatsApp perdían leads: los chats quedaban sin respuesta, los asesores se elegían a mano y nadie sabía qué campañas o asesores cerraban ventas.',
+      details: [
+        'Asignación por turnos (round robin) por departamento y sucursal, con grupos de respaldo cuando un departamento no tiene a nadie disponible',
+        'Reasignación automática si el asesor no responde en 5 minutos, y una cola que libera los leads al empezar el horario de atención',
+        'Los asesores se marcan disponibles desde WhatsApp; el sistema sigue la etapa de cada lead y muestra los atascados en un tablero Kanban',
+        'Tableros de analítica de leads de pauta y orgánicos, tiempos de respuesta por asesor y modelos de interés, con exportación a Excel',
+        'Sincronización cada hora con Meta Ads para relacionar cada lead con la campaña que lo generó',
+        'Conector MCP para claude.ai con inicio de sesión OAuth, herramientas de solo lectura y acciones auditadas, para consultar y operar el sistema desde Claude',
+      ],
+      architecture: [
+        'API en Next.js App Router sobre Vercel con Supabase Postgres; una función de base de datos hace la elección por turnos de forma atómica',
+        'Multiempresa: cada tabla operativa lleva tenant_id y las llamadas a ManyChat usan las credenciales propias de cada marca',
+        'Tareas programadas en Vercel Cron cada pocos minutos para reasignar, auditar y rescatar leads atascados, además de resúmenes diarios',
+      ],
+      decisions: [
+        'Las reasignaciones programadas envían solo identificadores y vuelven a confirmar el asesor antes de dispararse, tras corregir una condición de carrera que atribuía mal los leads orgánicos',
+        'Empresas de demostración con marcas ficticias y una bandeja simulada, para que el equipo comercial presente el producto sin exponer datos de clientes',
+      ],
+    },
+    'morpheus-whatsapp-platform': {
+      title: 'Morpheus — Plataforma Multiempresa de Atención por WhatsApp con IA',
+      summary: 'Desarrollado para Aumenta (contrato de servicios profesionales); en desarrollo activo. Un SaaS donde un asistente con IA atiende al cliente por WhatsApp al instante, lo pasa al asesor correcto y le muestra al negocio en tiempo real quién espera, cuánto tarda su equipo en responder y qué conversaciones terminan en venta. Nace de ChatCenter, su versión alfa (una bandeja de WhatsApp propia con bot de IA), e incorpora la asignación de leads de ManyConnect, eliminando la dependencia de ManyChat.',
+      metric: 'Cada negocio elige Groq, Claude, OpenAI o Gemini',
+      details: [
+        'Canal propio de WhatsApp sobre la Cloud API de Meta: mensajes entrantes y salientes, adjuntos, plantillas aprobadas y envíos masivos desde Excel',
+        'Bandeja compartida en tiempo real con asignación, notas, etiquetas, respuestas rápidas y estados del chat (pendiente, atendido, cerrado, vendido, perdido con motivo)',
+        'Constructor visual de flujos: inicios por palabra clave, anuncio o botón, preguntas que guardan datos, condiciones, pruebas en tu propio WhatsApp y métricas de abandono por paso',
+        'Asistente con IA que responde por intención y deriva a áreas (Ventas, RRHH, Secretaría); cada negocio usa la IA de la plataforma o su propia clave, con el consumo de tokens medido por negocio',
+        'Horarios de atención, reparto automático por porcentajes y asesores de respaldo por área',
+        'Reportes con comparación de periodos y exportación a Excel; app móvil diseñada en Figma en español e inglés',
+      ],
+      architecture: [
+        'Monorepo: API en Fastify con documentación OpenAPI, web en Next.js 16 y un paquete compartido con roles, esquemas Zod y un cliente HTTP tipado que usan la web y la futura app móvil',
+        'Todo recurso de un negocio vive bajo /v1/tenants/:tenantId y se filtra por tenant_id en SQL; cada tabla tiene seguridad a nivel de fila activada',
+        'Actualizaciones en tiempo real con Server-Sent Events que solo llevan identificadores, para que cada cliente vuelva a pedir los datos con sus propios permisos',
+        'Migraciones en SQL puro aplicadas al arrancar; despliegue con Docker Compose en un VPS y n8n como motor de automatización opcional',
+      ],
+      decisions: [
+        'Primero el contrato de la API: esquema Zod, luego la ruta, luego el método del cliente; la interfaz nunca hace fetch a mano',
+        'Los permisos se definen una sola vez y se verifican igual en la API y en la interfaz, con excepciones por persona además de los roles',
+        'Los chats que atiende el bot no entran a la cola de los asesores hasta que pasan a una persona, así el equipo solo ve las conversaciones que necesitan atención humana',
+      ],
+    },
+    'luzea-real-estate-landing': {
+      title: 'Luzea Apartamentos — Landing Inmobiliaria',
+      summary: 'Desarrollado para Aumenta (contrato de servicios profesionales). Landing de ventas para un complejo de apartamentos en San José Pinula, Guatemala, construida a partir del diseño en Figma en alrededor de una semana, con datos estructurados para SEO, analítica y captura de leads conectada a las automatizaciones del equipo de ventas.',
+      metric: 'Construida desde el diseño de Figma en alrededor de una semana',
+      details: [
+        'Maquetación fiel al diseño de Figma, adaptable hasta teléfonos pequeños, con animaciones en las secciones clave',
+        'Bloques de contenido que ayudan a decidir: comparación casa o apartamento, preguntas frecuentes, modelos y amenidades',
+        'Modal "Agenda tu visita" que conserva el modelo de apartamento que el visitante estaba viendo, y un formulario que califica el presupuesto del lead',
+        'Leads enviados por webhook a los flujos de automatización del equipo de ventas',
+        'Datos schema.org de tipo ApartmentComplex y FAQPage, imagen Open Graph, sitemap y Google Tag Manager para medir campañas',
+      ],
+    },
     'shopify-fel-ecommerce': {
       title: 'Plataforma E-Commerce con FEL y Automatización de Envíos',
       summary: 'Plataforma Shopify a la medida con facturación electrónica FEL (SAT Guatemala), automatización de envíos con varias transportistas y panel de administración. Reducción del 70% en el tiempo de procesamiento de órdenes.',
@@ -305,11 +504,14 @@ const dictionaries = {
       readCaseStudy: 'Read case study',
       flagship: 'Flagship',
       privateProject: 'Private project',
+      live: 'Live',
       badges: { accelerated: 'AI-Accelerated', enhanced: 'AI-Enhanced', performance: 'High-Performance' } as Record<BadgeType, string>,
     },
     caseStudy: {
       back: 'Back to all projects',
       keyResult: 'Key result',
+      visitSite: 'Visit the live site',
+      openApp: 'Open the app (sign-in required)',
       challenge: 'The challenge',
       built: 'What I built',
       architecture: 'Architecture',
@@ -427,11 +629,14 @@ const dictionaries = {
       readCaseStudy: 'Ver caso de estudio',
       flagship: 'Destacado',
       privateProject: 'Proyecto privado',
+      live: 'En vivo',
       badges: { accelerated: 'Acelerado con IA', enhanced: 'Potenciado con IA', performance: 'Alto rendimiento' } as Record<BadgeType, string>,
     },
     caseStudy: {
       back: 'Volver a todos los proyectos',
       keyResult: 'Resultado clave',
+      visitSite: 'Ver el sitio en vivo',
+      openApp: 'Abrir la app (requiere iniciar sesión)',
       challenge: 'El reto',
       built: 'Lo que construí',
       architecture: 'Arquitectura',

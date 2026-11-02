@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, ArrowRight, Languages, Lock, Mail } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ExternalLink, Languages, Lock, Mail } from 'lucide-react';
 import { getDictionary, getProject, getProjects, projectSlugs } from '@/content/dictionaries';
 import { isLocale, locales, site } from '@/content/site';
 
@@ -103,6 +103,17 @@ export default async function CaseStudyPage({ params }: PageProps<'/[locale]/pro
             {project.title}
           </h1>
           <p className="text-lg text-gray-300 leading-relaxed">{project.summary}</p>
+          {project.url && (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-medium transition-transform hover:scale-105"
+            >
+              {project.urlRequiresLogin ? c.openApp : c.visitSite}
+              <ExternalLink size={16} aria-hidden />
+            </a>
+          )}
         </div>
 
         {project.metric && (

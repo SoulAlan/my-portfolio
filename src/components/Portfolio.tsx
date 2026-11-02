@@ -300,6 +300,12 @@ const Portfolio: React.FC<PortfolioProps> = ({ locale, t, projects, skills }) =>
                         {t.projects.badges[project.badge]}
                       </span>
                     )}
+                    {project.url && !project.urlRequiresLogin && (
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-500/15 border border-green-500/40 text-green-500">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-400" aria-hidden />
+                        {t.projects.live}
+                      </span>
+                    )}
                     {project.isPrivate && (
                       <span className={`inline-flex items-center gap-1 text-xs ${muted}`}>
                         <Lock size={12} aria-hidden />
