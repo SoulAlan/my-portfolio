@@ -55,7 +55,7 @@ const projectBase: ProjectBase[] = [
   },
   {
     slug: 'morpheus-whatsapp-platform',
-    tech: ['Next.js 16', 'Fastify', 'PostgreSQL', 'Zod', 'WhatsApp Cloud API', 'Groq · Claude · OpenAI · Gemini', 'n8n', 'Docker'],
+    tech: ['Next.js 16', 'Fastify', 'PostgreSQL', 'Zod', 'WhatsApp Cloud API', 'Groq · Claude · OpenAI · Gemini', 'n8n', 'React Flow', 'React Native (Expo)', 'Docker'],
     flagship: true,
     badge: 'enhanced',
     url: 'https://morpheus-pied.vercel.app/admin',
@@ -97,6 +97,10 @@ const projectBase: ProjectBase[] = [
     slug: 'luzea-real-estate-landing',
     tech: ['Next.js', 'React', 'TypeScript', 'Motion', 'schema.org', 'Google Tag Manager', 'Webhooks'],
     url: 'https://proyectos.luzeaapartamentos.gt/',
+  },
+  {
+    slug: 'aumenta-tasks-telegram-bot',
+    tech: ['PHP', 'Telegram Bot API', 'Webhooks', 'Cron', 'CSV import', 'Socket.IO'],
   },
   {
     slug: 'corporate-email-signatures',
@@ -166,7 +170,7 @@ const projectText: Record<Locale, Record<string, ProjectText>> = {
     },
     'morpheus-whatsapp-platform': {
       title: 'Morpheus — Multi-Tenant WhatsApp Customer Service Platform with AI',
-      summary: "Built for Aumenta (professional services contract); in active development. A SaaS where an AI assistant answers customers on WhatsApp instantly, hands them to the right advisor, and shows the business in real time who is waiting, how fast the team replies, and which conversations end in a sale. It grew out of ChatCenter, its alpha version (an in-house WhatsApp inbox with an AI bot), and absorbs ManyConnect’s lead routing, removing the dependency on ManyChat.",
+      summary: "Built for Aumenta (professional services contract); in production with Aumenta's clients. A SaaS where an AI assistant answers customers on WhatsApp instantly, hands them to the right advisor, and shows the business in real time who is waiting, how fast the team replies, and which conversations end in a sale. It grew out of ChatCenter, its alpha version (an in-house WhatsApp inbox with an AI bot), and absorbs ManyConnect’s lead routing, removing the dependency on ManyChat.",
       metric: 'Each business picks Groq, Claude, OpenAI, or Gemini',
       details: [
         'Own WhatsApp channel on the Meta Cloud API: inbound and outbound messages, attachments, approved templates, and bulk sends from Excel',
@@ -174,13 +178,16 @@ const projectText: Record<Locale, Record<string, ProjectText>> = {
         'Visual flow builder: keyword, ad, and button triggers, questions that save data, conditions, live testing on your own WhatsApp, and drop-off metrics per step',
         'AI assistant that answers by intent and routes to areas such as Sales or HR; each business uses the platform’s AI or its own key, with token usage tracked per business',
         'Business hours, percentage-based automatic distribution, and backup advisors per area',
-        'Reports with period comparison and Excel export; mobile app designed in Figma in Spanish and English',
+        'Reports with period comparison and Excel export',
+        'React Native (Expo) mobile app, in development, that I am building with AI assistance: chat inbox, conversation, contact sheet, team availability, and dashboards, with real-time updates over SSE, tokens in secure storage with rotating refresh, and Jest tests',
       ],
       architecture: [
         'Monorepo: Fastify API with OpenAPI docs, Next.js 16 web app, and a shared package with roles, Zod schemas, and a typed HTTP client used by web and the upcoming mobile app',
         'Every business resource lives under /v1/tenants/:tenantId and is filtered by tenant_id in SQL; row-level security is enabled on every table',
         'Real-time updates over Server-Sent Events that carry only ids, so clients re-fetch with their own permissions',
         'Plain SQL migrations applied on startup; deployed with Docker Compose on a VPS, with n8n as an optional automation backend',
+        'Flow engine runs before the AI assistant: published flow versions are immutable, so a conversation in progress finishes on the version it started with',
+        'One adapter per LLM provider (Groq, Anthropic, OpenAI, Google) with its official SDK and the same structured response, with token usage recorded per call',
       ],
       decisions: [
         'API contract first: Zod schema, then route, then client method — the UI never calls fetch by hand',
@@ -198,6 +205,19 @@ const projectText: Record<Locale, Record<string, ProjectText>> = {
         '"Schedule a visit" modal that carries the apartment model the visitor was looking at, plus a budget-qualifying lead form',
         'Leads sent by webhook to the sales team’s automation workflows',
         'schema.org ApartmentComplex and FAQPage data, Open Graph image, sitemap, and Google Tag Manager for campaign tracking',
+      ],
+    },
+    'aumenta-tasks-telegram-bot': {
+      title: 'Aumenta Tasks — Telegram Bot for Team Task Management',
+      summary: 'Contribution to Aumenta’s internal task platform (PHP), built by a small team. I built the Telegram bot that lets the team receive, create, update, and close tasks from Telegram without opening the web app, and supported the real-time chat over Socket.IO.',
+      metric: 'Tasks managed end to end from Telegram',
+      details: [
+        'Telegram webhook with account linking and an inline-button menu',
+        'Guided task creation with client and project search, limited by role to the CTO and coordinators',
+        'Notifications to assignees and approvers; people log progress or reject a task with a reason by replying to the bot',
+        'Daily reminders from a scheduled job, and a /tareas command with each person’s pending work',
+        'Bulk task upload by replying to the bot with a CSV, validated before inserting',
+        'Supported the team on the real-time chat built with Socket.IO',
       ],
     },
     'shopify-fel-ecommerce': {
@@ -320,7 +340,7 @@ const projectText: Record<Locale, Record<string, ProjectText>> = {
     },
     'morpheus-whatsapp-platform': {
       title: 'Morpheus — Plataforma Multiempresa de Atención por WhatsApp con IA',
-      summary: 'Desarrollado para Aumenta (contrato de servicios profesionales); en desarrollo activo. Un SaaS donde un asistente con IA atiende al cliente por WhatsApp al instante, lo pasa al asesor correcto y le muestra al negocio en tiempo real quién espera, cuánto tarda su equipo en responder y qué conversaciones terminan en venta. Nace de ChatCenter, su versión alfa (una bandeja de WhatsApp propia con bot de IA), e incorpora la asignación de leads de ManyConnect, eliminando la dependencia de ManyChat.',
+      summary: 'Desarrollado para Aumenta (contrato de servicios profesionales); en producción con clientes de Aumenta. Un SaaS donde un asistente con IA atiende al cliente por WhatsApp al instante, lo pasa al asesor correcto y le muestra al negocio en tiempo real quién espera, cuánto tarda su equipo en responder y qué conversaciones terminan en venta. Nace de ChatCenter, su versión alfa (una bandeja de WhatsApp propia con bot de IA), e incorpora la asignación de leads de ManyConnect, eliminando la dependencia de ManyChat.',
       metric: 'Cada negocio elige Groq, Claude, OpenAI o Gemini',
       details: [
         'Canal propio de WhatsApp sobre la Cloud API de Meta: mensajes entrantes y salientes, adjuntos, plantillas aprobadas y envíos masivos desde Excel',
@@ -328,13 +348,16 @@ const projectText: Record<Locale, Record<string, ProjectText>> = {
         'Constructor visual de flujos: inicios por palabra clave, anuncio o botón, preguntas que guardan datos, condiciones, pruebas en tu propio WhatsApp y métricas de abandono por paso',
         'Asistente con IA que responde por intención y deriva a áreas (Ventas, RRHH, Secretaría); cada negocio usa la IA de la plataforma o su propia clave, con el consumo de tokens medido por negocio',
         'Horarios de atención, reparto automático por porcentajes y asesores de respaldo por área',
-        'Reportes con comparación de periodos y exportación a Excel; app móvil diseñada en Figma en español e inglés',
+        'Reportes con comparación de periodos y exportación a Excel',
+        'App móvil en React Native (Expo), en desarrollo, que estoy construyendo con apoyo de IA: bandeja de chats, conversación, ficha del contacto, disponibilidad del equipo y tableros, con tiempo real por SSE, tokens en almacenamiento seguro con renovación rotativa y pruebas con Jest',
       ],
       architecture: [
         'Monorepo: API en Fastify con documentación OpenAPI, web en Next.js 16 y un paquete compartido con roles, esquemas Zod y un cliente HTTP tipado que usan la web y la futura app móvil',
         'Todo recurso de un negocio vive bajo /v1/tenants/:tenantId y se filtra por tenant_id en SQL; cada tabla tiene seguridad a nivel de fila activada',
         'Actualizaciones en tiempo real con Server-Sent Events que solo llevan identificadores, para que cada cliente vuelva a pedir los datos con sus propios permisos',
         'Migraciones en SQL puro aplicadas al arrancar; despliegue con Docker Compose en un VPS y n8n como motor de automatización opcional',
+        'El motor de flujos corre antes que el asistente con IA: las versiones publicadas no cambian, así una conversación a la mitad termina con la versión con la que empezó',
+        'Un adaptador por proveedor de IA (Groq, Anthropic, OpenAI, Google) con su SDK oficial y la misma respuesta estructurada, registrando los tokens de cada llamada',
       ],
       decisions: [
         'Primero el contrato de la API: esquema Zod, luego la ruta, luego el método del cliente; la interfaz nunca hace fetch a mano',
@@ -352,6 +375,19 @@ const projectText: Record<Locale, Record<string, ProjectText>> = {
         'Modal "Agenda tu visita" que conserva el modelo de apartamento que el visitante estaba viendo, y un formulario que califica el presupuesto del lead',
         'Leads enviados por webhook a los flujos de automatización del equipo de ventas',
         'Datos schema.org de tipo ApartmentComplex y FAQPage, imagen Open Graph, sitemap y Google Tag Manager para medir campañas',
+      ],
+    },
+    'aumenta-tasks-telegram-bot': {
+      title: 'Tareas de Aumenta — Bot de Telegram para Gestionar el Trabajo del Equipo',
+      summary: 'Aporte a la plataforma interna de tareas de Aumenta (PHP), desarrollada por un equipo pequeño. Construí el bot de Telegram con el que el equipo recibe, crea, actualiza y cierra tareas desde Telegram sin abrir la web, y apoyé en el chat en tiempo real con Socket.IO.',
+      metric: 'Tareas gestionadas de principio a fin desde Telegram',
+      details: [
+        'Webhook de Telegram con vinculación de cuentas y menú de botones',
+        'Creación guiada de tareas con búsqueda de cliente y proyecto, limitada por rol al CTO y a los coordinadores',
+        'Avisos a responsables y aprobadores; cada persona registra avances o rechaza una tarea con motivo respondiéndole al bot',
+        'Recordatorios diarios desde una tarea programada y el comando /tareas con lo pendiente de cada persona',
+        'Carga masiva de tareas respondiéndole al bot con un CSV, validado antes de insertar',
+        'Apoyo al equipo en el chat en tiempo real hecho con Socket.IO',
       ],
     },
     'shopify-fel-ecommerce': {
@@ -434,10 +470,12 @@ export const getProject = (locale: Locale, slug: string): Project | undefined =>
 export const projectSlugs = projectBase.map((p) => p.slug);
 
 export const skills = [
-  { category: 'AI-Assisted Dev', items: ['Claude Code (CLI)', 'Claude API', 'GitHub Copilot', 'Cursor', 'AI Workflows (3+ yrs)'], isAI: true },
-  { category: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML/CSS'] },
-  { category: 'Backend', items: ['Node.js', 'TypeScript', 'JavaScript', 'PHP', 'NestJS', 'PostgreSQL', 'GraphQL', 'REST APIs', 'SAP APIs'] },
-  { category: 'Infrastructure', items: ['AWS Lambda', 'Serverless', 'Docker', 'Azure', 'Linode/VPS', 'CI/CD', 'SSH'] },
+  { category: 'AI-Assisted Dev', items: ['Claude Code (CLI)', 'GitHub Copilot', 'Cursor', 'Agent guides (AGENTS.md / CLAUDE.md)', 'AI Workflows (3+ yrs)'], isAI: true },
+  { category: 'AI in Products', items: ['LLM APIs: Groq, Anthropic, OpenAI, Gemini', 'Structured outputs & intent routing', 'AI agents & MCP servers', 'n8n automations', 'WhatsApp Cloud API bots', 'Vercel AI SDK'], isAI: true },
+  { category: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'React Flow', 'HTML/CSS'] },
+  { category: 'Backend', items: ['Node.js', 'Fastify', 'PHP', 'NestJS', 'REST APIs & OpenAPI', 'PostgreSQL', 'MySQL / MariaDB', 'Prisma', 'Supabase', 'Server-Sent Events', 'Telegram Bot API', 'GraphQL', 'SAP APIs'] },
+  { category: 'Mobile', items: ['React Native', 'Expo & Expo Router', 'TanStack Query', 'Secure token storage', 'Jest + Testing Library'] },
+  { category: 'Infrastructure', items: ['Docker & Docker Compose', 'Vercel', 'AWS Lambda', 'Azure', 'Serverless', 'Linode/VPS', 'SSH', 'GitHub Actions CI', 'Git'] },
 ];
 
 const dictionaries = {
@@ -472,14 +510,69 @@ const dictionaries = {
       ],
       areas: ['Full Stack Development', 'Infrastructure & DevOps', 'Project Management', 'Technical Leadership'],
     },
+    automation: {
+      eyebrow: 'Automation & Applied AI',
+      title: 'AI that runs inside the product, not just in my editor',
+      intro: 'Beyond using AI to write code, I build it into products: WhatsApp bots that answer by intent, visual automation flows, LLM integrations across providers, and connectors that let Claude operate real systems.',
+      seeCaseStudy: 'See it in the case study',
+      items: [
+        {
+          title: 'Visual flow builder',
+          body: 'Drag-and-drop canvas (React Flow) where each business decides what happens in its WhatsApp conversations: keyword, ad, and template-button triggers, questions that save customer data, conditions, waits, and handoffs. Published versions never change, so a conversation in progress finishes on its own version.',
+          project: 'morpheus-whatsapp-platform',
+        },
+        {
+          title: 'AI replies by intent',
+          body: 'An "Answer with AI" step returns structured output with an intent and a reply. When it detects an intent it exits through that branch; otherwise it answers from the business’s own knowledge base (up to 20,000 characters) and waits. If the AI fails, the conversation moves on with a note instead of breaking.',
+          project: 'morpheus-whatsapp-platform',
+        },
+        {
+          title: 'Assistant that can launch flows',
+          body: 'The assistant starts a flow when it fits — to send the exact product sheet or image — and keeps answering with that context. It validates and saves the data it collects into the customer record, and hands the chat to a person when needed; a human reply pauses the bot.',
+          project: 'morpheus-whatsapp-platform',
+        },
+        {
+          title: 'Bring your own model',
+          body: 'Each business uses the platform’s AI or its own key for Groq, Anthropic, OpenAI, or Google. Keys are tested before saving and stored encrypted, every call records its tokens, and Claude calls use prompt caching. If a business’s key fails, the chat goes to the team instead of silently using the platform’s key.',
+          project: 'morpheus-whatsapp-platform',
+        },
+        {
+          title: 'n8n as engine or as a step',
+          body: 'Per-business n8n webhooks signed with a 2-minute JWT bound to the request body. Bot turns are idempotent per message in Postgres, message bursts are grouped, and a failed call retries once before pausing the bot and leaving a note for the team in the conversation.',
+          project: 'morpheus-whatsapp-platform',
+        },
+        {
+          title: 'Follow-ups and drop-off metrics',
+          body: 'Automatic re-contact when a customer leaves a flow halfway (after 5 minutes to 23 hours, once per silence), plus per-exit counts and a "where they drop off" view so the business can fix the step that loses people.',
+          project: 'morpheus-whatsapp-platform',
+        },
+        {
+          title: 'Scheduled automations',
+          body: 'Cron jobs that reassign unattended leads every 3 minutes, audit assignments every 5, sync Meta Ads every hour, and send daily digests.',
+          project: 'manyconnect-lead-routing',
+        },
+        {
+          title: 'MCP connector for Claude',
+          body: 'An MCP server with OAuth sign-in, so managers can query ManyConnect and run audited actions just by talking to Claude.',
+          project: 'manyconnect-lead-routing',
+        },
+      ],
+    },
     skillsTitle: 'Technical Skills',
     experience: {
       title: 'Professional Experience',
       items: [
         {
+          title: 'Technology & Automation Coordinator',
+          company: 'Aumenta · professional services contract',
+          period: '2026 — Present',
+          description: 'Promoted in 2026 to coordinate Aumenta’s technology and automation work. I design and build the agency’s WhatsApp and AI platforms (Morpheus, ManyConnect), its automations with n8n and LLMs, internal tools such as the Telegram bot for task management, and client sites such as Luzea — using AI-assisted workflows every day.',
+          highlights: ['WhatsApp Cloud API · AI bots', 'n8n · LLM integrations · MCP', 'React Native (Expo)', 'Node.js · Fastify · Next.js · PHP'],
+        },
+        {
           title: 'Senior Full Stack Developer & Tech Lead',
-          company: 'Tech & E-Commerce Agency',
-          period: '2022 — Present',
+          company: 'Aumenta · professional services contract',
+          period: '2022 — 2026',
           description: 'Architecture and development of e-commerce platforms, enterprise integration systems, and high-traffic applications. Pioneer in AI-assisted workflows (Claude Code, GitHub Copilot) reducing delivery times by 3-4x. Technical lead on projects integrating Shopify, SAP Business One, and electronic invoicing systems.',
           highlights: ['Node.js · TypeScript · React/Next.js', 'Shopify API · SAP Business One', '6+ yrs experience · AI-assisted since 2022', 'FEL · Electronic Invoicing GT'],
         },
@@ -597,14 +690,69 @@ const dictionaries = {
       ],
       areas: ['Desarrollo Full Stack', 'Infraestructura y DevOps', 'Gestión de proyectos', 'Liderazgo técnico'],
     },
+    automation: {
+      eyebrow: 'Automatizaciones e IA aplicada',
+      title: 'IA que trabaja dentro del producto, no solo en mi editor',
+      intro: 'Además de usar IA para programar, la integro en productos: bots de WhatsApp que responden por intención, flujos de automatización visuales, integraciones con varios proveedores de modelos de lenguaje y conectores para que Claude opere sistemas reales.',
+      seeCaseStudy: 'Verlo en el caso de estudio',
+      items: [
+        {
+          title: 'Constructor visual de flujos',
+          body: 'Lienzo de arrastrar y soltar (React Flow) donde cada negocio decide qué pasa en sus conversaciones de WhatsApp: inicios por palabra clave, anuncio o botón de plantilla, preguntas que guardan datos del cliente, condiciones, esperas y pase a un asesor. Las versiones publicadas no cambian, así una conversación a la mitad termina con su propia versión.',
+          project: 'morpheus-whatsapp-platform',
+        },
+        {
+          title: 'Respuestas con IA por intención',
+          body: 'Un paso "Responder con IA" devuelve una salida estructurada con la intención y la respuesta. Si detecta una intención, sale por esa rama; si no, responde con la información del propio negocio (hasta 20.000 caracteres) y espera. Si la IA falla, la conversación sigue con una nota en lugar de romperse.',
+          project: 'morpheus-whatsapp-platform',
+        },
+        {
+          title: 'Asistente que lanza flujos',
+          body: 'El asistente inicia un flujo cuando conviene, para enviar la ficha o imagen exacta del producto, y sigue respondiendo con ese contexto. Valida y guarda en la ficha del cliente los datos que recoge, y pasa el chat a una persona cuando hace falta; si alguien del equipo responde, el bot se pausa.',
+          project: 'morpheus-whatsapp-platform',
+        },
+        {
+          title: 'Cada negocio elige su modelo',
+          body: 'Cada negocio usa la IA de la plataforma o su propia clave de Groq, Anthropic, OpenAI o Google. Las claves se prueban antes de guardarse y quedan cifradas, cada llamada registra sus tokens y las llamadas a Claude usan caché del prompt. Si la clave de un negocio falla, el chat pasa al equipo en vez de usar en silencio la clave de la plataforma.',
+          project: 'morpheus-whatsapp-platform',
+        },
+        {
+          title: 'n8n como motor o como paso',
+          body: 'Webhooks de n8n por negocio firmados con un JWT de 2 minutos atado al cuerpo de la petición. Los turnos del bot son idempotentes por mensaje en Postgres, las ráfagas de mensajes se agrupan y una llamada fallida se reintenta una vez antes de pausar el bot y dejarle una nota al equipo en la conversación.',
+          project: 'morpheus-whatsapp-platform',
+        },
+        {
+          title: 'Re-contacto y métricas de abandono',
+          body: 'Re-contacto automático cuando el cliente deja un flujo a medias (de 5 minutos a 23 horas, una vez por silencio), más conteos por salida y una vista de "dónde abandonan" para que el negocio corrija el paso que pierde gente.',
+          project: 'morpheus-whatsapp-platform',
+        },
+        {
+          title: 'Automatizaciones programadas',
+          body: 'Tareas programadas que reasignan leads sin atender cada 3 minutos, auditan asignaciones cada 5, sincronizan Meta Ads cada hora y envían resúmenes diarios.',
+          project: 'manyconnect-lead-routing',
+        },
+        {
+          title: 'Conector MCP para Claude',
+          body: 'Un servidor MCP con inicio de sesión OAuth, para que los gerentes consulten ManyConnect y ejecuten acciones auditadas solo conversando con Claude.',
+          project: 'manyconnect-lead-routing',
+        },
+      ],
+    },
     skillsTitle: 'Habilidades técnicas',
     experience: {
       title: 'Experiencia profesional',
       items: [
         {
+          title: 'Coordinador de Tecnología y Automatizaciones',
+          company: 'Aumenta · contrato de servicios profesionales',
+          period: '2026 — Presente',
+          description: 'Promovido en 2026 para coordinar el trabajo de tecnología y automatizaciones de Aumenta. Diseño y construyo las plataformas de WhatsApp e IA de la agencia (Morpheus, ManyConnect), sus automatizaciones con n8n y modelos de lenguaje, herramientas internas como el bot de Telegram para gestionar tareas y sitios para clientes como Luzea, usando flujos asistidos por IA todos los días.',
+          highlights: ['WhatsApp Cloud API · bots con IA', 'n8n · integración de LLMs · MCP', 'React Native (Expo)', 'Node.js · Fastify · Next.js · PHP'],
+        },
+        {
           title: 'Senior Full Stack Developer & Tech Lead',
-          company: 'Agencia de tecnología y e-commerce',
-          period: '2022 — Presente',
+          company: 'Aumenta · contrato de servicios profesionales',
+          period: '2022 — 2026',
           description: 'Arquitectura y desarrollo de plataformas de comercio electrónico, sistemas de integración empresarial y aplicaciones de alta demanda. Pionero en flujos de trabajo asistidos por IA (Claude Code, GitHub Copilot) que redujeron los tiempos de entrega 3-4x. Líder técnico en proyectos con Shopify, SAP Business One y facturación electrónica.',
           highlights: ['Node.js · TypeScript · React/Next.js', 'Shopify API · SAP Business One', '6+ años de experiencia · IA desde 2022', 'FEL · Facturación electrónica GT'],
         },

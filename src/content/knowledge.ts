@@ -29,6 +29,12 @@ export function buildProfileText({ compact = false }: { compact?: boolean } = {}
     '## Skills',
     ...skills.map((group) => `- ${group.category}: ${group.items.join(', ')}`),
     '',
+    '## Automation & applied AI',
+    ...t.automation.items.map((item) => {
+      const body = compact ? item.body.split('. ')[0].replace(/\.?$/, '.') : item.body;
+      return `- ${item.title} (${SITE_URL}/en/projects/${item.project}): ${body}`;
+    }),
+    '',
     '## Experience',
     ...t.experience.items.flatMap((job) => [
       `### ${job.title} — ${job.company} (${job.period})`,

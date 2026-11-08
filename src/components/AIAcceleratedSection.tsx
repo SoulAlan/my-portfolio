@@ -26,7 +26,8 @@ const content = {
         items: [
           { name: "Claude Code (CLI)", desc: "Arquitectura y lógica compleja" },
           { name: "Claude API", desc: "Generación y refactorización de código" },
-          { name: "GitHub Copilot", desc: "Sugerencias inline y boilerplate" }
+          { name: "GitHub Copilot", desc: "Sugerencias inline y boilerplate" },
+          { name: "AGENTS.md / CLAUDE.md", desc: "Reglas del proyecto para que los agentes de IA respeten contratos de API, permisos y estándares de interfaz" }
         ]
       },
       process: {
@@ -67,7 +68,8 @@ const content = {
         items: [
           { name: "Claude Code (CLI)", desc: "Architecture and complex logic" },
           { name: "Claude API", desc: "Code generation and refactoring" },
-          { name: "GitHub Copilot", desc: "Inline suggestions and boilerplate" }
+          { name: "GitHub Copilot", desc: "Inline suggestions and boilerplate" },
+          { name: "AGENTS.md / CLAUDE.md", desc: "Project rules so AI agents follow API contracts, permissions, and UI standards" }
         ]
       },
       process: {

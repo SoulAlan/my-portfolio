@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Briefcase, ChevronDown, Code, Cpu, Github, Languages, Linkedin, Lock, Mail, MapPin, Moon, Server, Sun, Users, Zap } from 'lucide-react';
 import AIAcceleratedSection from '@/components/AIAcceleratedSection';
+import AutomationSection from '@/components/AutomationSection';
 import ContactSection from '@/components/ContactSection';
 import TimeZonePanel from '@/components/TimeZonePanel';
 import type { BadgeType, Dictionary, Project, skills as skillsData } from '@/content/dictionaries';
@@ -200,11 +201,13 @@ const Portfolio: React.FC<PortfolioProps> = ({ locale, t, projects, skills }) =>
 
         <AIAcceleratedSection isDarkMode={isDarkMode} language={locale} />
 
+        <AutomationSection locale={locale} t={t.automation} isDarkMode={isDarkMode} />
+
         {/* Skills */}
         <section className={`py-20 px-4 relative z-20 ${isDarkMode ? 'bg-gray-800/50' : 'bg-gray-100/50'}`}>
           <div className="max-w-6xl mx-auto">
             <h2 className={sectionTitle}>{t.skillsTitle}</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {skills.map((group) => {
                 const isAI = 'isAI' in group && group.isAI;
                 return (
