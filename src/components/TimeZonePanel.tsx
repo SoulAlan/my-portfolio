@@ -38,14 +38,14 @@ const TimeZonePanel: React.FC<TimeZonePanelProps> = ({ locale, t, isDarkMode }) 
         onClick={() => setIsOpen(true)}
         aria-label={t.title}
         aria-expanded={isOpen}
-        className={`lg:hidden fixed top-6 left-4 z-40 p-3 rounded-full shadow-lg transition-transform hover:scale-110 ${isOpen ? 'invisible' : ''} ${isDarkMode ? 'bg-gray-800 text-orange-400' : 'bg-white text-orange-500'}`}
+        className={`floating-ui lg:hidden fixed top-6 left-4 z-40 p-3 rounded-full shadow-lg transition-transform hover:scale-110 ${isOpen ? 'invisible' : ''} ${isDarkMode ? 'bg-gray-800 text-orange-400' : 'bg-white text-orange-500'}`}
       >
         <Clock size={20} />
       </button>
 
       <aside
         aria-label={t.title}
-        className={`${isOpen ? 'block' : 'hidden'} lg:block fixed top-6 left-4 lg:left-6 z-40 p-4 rounded-lg max-w-xs backdrop-blur-sm ${isDarkMode ? 'bg-gray-800/90' : 'bg-white/90 shadow-lg'}`}
+        className={`floating-ui ${isOpen ? 'block' : 'hidden'} lg:block fixed top-6 left-4 lg:left-6 z-40 p-4 rounded-lg max-w-xs backdrop-blur-sm ${isDarkMode ? 'bg-gray-800/90' : 'bg-white/90 shadow-lg'}`}
       >
         <div className="flex items-center justify-between gap-4 mb-3">
           <h2 className="font-semibold text-sm text-orange-500">{t.title}</h2>

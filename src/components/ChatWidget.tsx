@@ -74,7 +74,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ locale, t, email }) => {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 pl-4 pr-5 py-3 rounded-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-medium shadow-lg shadow-orange-500/30 transition-transform hover:scale-105"
+        className="floating-ui fixed bottom-6 right-6 z-50 flex items-center gap-2 pl-4 pr-5 py-3 rounded-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-medium shadow-lg shadow-orange-500/30 transition-transform hover:scale-105"
       >
         <Sparkles size={18} aria-hidden />
         {t.open}

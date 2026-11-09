@@ -24,3 +24,17 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Floating buttons (time zones, theme, language, chat) fade out on phones and
+   tablets while the flow demo canvas is on screen, so they don't cover it.
+   FlowPlayground sets data-flow-focus on <html>. */
+.floating-ui {
+  transition: opacity 0.2s ease;
+}
+
+@media (max-width: 1023px) {
+  html[data-flow-focus] .floating-ui {
+    opacity: 0;
+    pointer-events: none;
+  }
+}

@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Calendar, Check, Copy, Download, ExternalLink, Github, Linkedin, Mail, Send } from 'lucide-react';
+import { Calendar, Check, Copy, Download, ExternalLink, Github, Linkedin, Mail } from 'lucide-react';
+import ContactForm from '@/components/ContactForm';
 import type { Dictionary } from '@/content/dictionaries';
 import { site, type Locale } from '@/content/site';
 
@@ -12,11 +13,8 @@ interface ContactSectionProps {
   isDarkMode: boolean;
 }
 
-type Status = 'idle' | 'sending' | 'sent' | 'error' | 'invalid';
-
 const ContactSection: React.FC<ContactSectionProps> = ({ locale, t, openToRemote, isDarkMode }) => {
   const [copied, setCopied] = useState(false);
-  const [status, setStatus] = useState<Status>('idle');
   const cvUrl = site.cv[locale];
 
   const copyEmail = async () => {
@@ -25,38 +23,9 @@ const ContactSection: React.FC<ContactSectionProps> = ({ locale, t, openToRemote
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
-
-    if (!data.name?.trim() || !/^\S+@\S+\.\S+$/.test(data.email ?? '') || (data.message?.trim().length ?? 0) < 10) {
-      setStatus('invalid');
-      return;
-    }
-
-    setStatus('sending');
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, locale }),
-      });
-      if (!res.ok) throw new Error(String(res.status));
-      form.reset();
-      setStatus('sent');
-    } catch {
-      setStatus('error');
-    }
-  };
-
   const secondaryButton = `flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 ${isDarkMode
     ? 'bg-gray-800 hover:bg-gray-700 border border-orange-500/20 hover:border-orange-500/40'
     : 'bg-white hover:bg-gray-50 border border-orange-500/30 hover:border-orange-500/60 shadow-lg'}`;
-  const input = `w-full px-4 py-3 rounded-lg border outline-none focus:ring-2 focus:ring-orange-500 ${isDarkMode
-    ? 'bg-gray-900 border-gray-700 text-white placeholder-gray-500'
-    : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'}`;
-  const label = `block text-sm font-medium mb-1 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`;
 
   return (
     <section id="contact" className="py-20 px-4 relative z-20 scroll-mt-8">
@@ -111,52 +80,9 @@ const ContactSection: React.FC<ContactSectionProps> = ({ locale, t, openToRemote
           </div>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          noValidate
-          className={`max-w-2xl mx-auto p-6 md:p-8 rounded-xl text-left ${isDarkMode ? 'bg-gray-800/60 border border-gray-700' : 'bg-white border border-gray-200 shadow-lg'}`}
-        >
-          <h3 className="text-2xl font-semibold mb-6 text-orange-400">{t.form.title}</h3>
-          <div className="grid md:grid-cols-2 gap-4 mb-4">
-            <div>
-              <label htmlFor="contact-name" className={label}>{t.form.name}</label>
-              <input id="contact-name" name="name" required autoComplete="name" maxLength={100} className={input} />
-            </div>
-            <div>
-              <label htmlFor="contact-email" className={label}>{t.form.email}</label>
-              <input id="contact-email" name="email" type="email" required autoComplete="email" maxLength={200} className={input} />
-            </div>
-          </div>
-          <div className="mb-4">
-            <label htmlFor="contact-company" className={label}>{t.form.company}</label>
-            <input id="contact-company" name="company" autoComplete="organization" maxLength={100} className={input} />
-          </div>
-          <div className="mb-6">
-            <label htmlFor="contact-message" className={label}>{t.form.message}</label>
-            <textarea id="contact-message" name="message" required rows={5} maxLength={5000} className={input} />
-          </div>
-          {/* Honeypot: hidden from people, filled in by bots */}
-          <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
-
-          <button
-            type="submit"
-            disabled={status === 'sending'}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 disabled:opacity-60 px-8 py-3 rounded-full text-white font-medium transition-all"
-          >
-            <Send size={18} aria-hidden />
-            {status === 'sending' ? t.form.sending : t.form.send}
-          </button>
-
-          <p role="status" aria-live="polite" className="mt-4 text-sm min-h-5">
-            {status === 'sent' && <span className="text-green-500">{t.form.success}</span>}
-            {status === 'invalid' && <span className="text-red-400">{t.form.invalid}</span>}
-            {status === 'error' && (
-              <span className="text-red-400">
-                {t.form.error} <a className="underline" href={`mailto:${site.email}`}>{site.email}</a>
-              </span>
-            )}
-          </p>
-        </form>
+        <div className={`max-w-2xl mx-auto p-6 md:p-8 rounded-xl ${isDarkMode ? 'bg-gray-800/60 border border-gray-700' : 'bg-white border border-gray-200 shadow-lg'}`}>
+          <ContactForm locale={locale} t={t.form} isDarkMode={isDarkMode} idPrefix="contact" />
+        </div>
       </div>
     </section>
   );

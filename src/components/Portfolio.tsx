@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Briefcase, ChevronDown, Code, Cpu, Github, Languages, Linkedin, Lock, Mail, MapPin, Moon, Server, Sun, Users, Zap } from 'lucide-react';
@@ -17,6 +18,12 @@ interface PortfolioProps {
   projects: Project[];
   skills: typeof skillsData;
 }
+
+// React Flow only runs in the browser and is not needed for the first paint.
+const FlowPlayground = dynamic(() => import('@/components/FlowPlayground'), {
+  ssr: false,
+  loading: () => <div className="h-[460px] sm:h-[420px] rounded-xl border border-gray-700/40 animate-pulse" />,
+});
 
 const areaIcons = [
   <Code key="code" className="text-orange-500" size={24} aria-hidden />,
@@ -71,7 +78,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ locale, t, projects, skills }) =>
         type="button"
         onClick={() => setIsDarkMode(!isDarkMode)}
         aria-label={t.themeToggle}
-        className={`fixed top-6 right-6 z-50 p-3 rounded-full transition-all duration-300 hover:scale-110 ${isDarkMode ? 'bg-gray-800 hover:bg-gray-700 text-yellow-400' : 'bg-white hover:bg-gray-100 text-gray-800 shadow-lg'}`}
+        className={`floating-ui fixed top-6 right-6 z-50 p-3 rounded-full transition-all duration-300 hover:scale-110 ${isDarkMode ? 'bg-gray-800 hover:bg-gray-700 text-yellow-400' : 'bg-white hover:bg-gray-100 text-gray-800 shadow-lg'}`}
       >
         {isDarkMode ? <Sun size={24} aria-hidden /> : <Moon size={24} aria-hidden />}
       </button>
@@ -80,7 +87,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ locale, t, projects, skills }) =>
         href={`/${otherLocale}`}
         hrefLang={otherLocale}
         aria-label={t.switchLanguage.aria}
-        className={`fixed top-20 right-6 z-50 flex items-center gap-1.5 px-3 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 ${isDarkMode ? 'bg-gray-800 hover:bg-gray-700 text-blue-400' : 'bg-white hover:bg-gray-100 text-gray-800 shadow-lg'}`}
+        className={`floating-ui fixed top-20 right-6 z-50 flex items-center gap-1.5 px-3 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 ${isDarkMode ? 'bg-gray-800 hover:bg-gray-700 text-blue-400' : 'bg-white hover:bg-gray-100 text-gray-800 shadow-lg'}`}
       >
         <Languages size={18} aria-hidden />
         {otherLocale.toUpperCase()}
@@ -202,6 +209,21 @@ const Portfolio: React.FC<PortfolioProps> = ({ locale, t, projects, skills }) =>
         <AIAcceleratedSection isDarkMode={isDarkMode} language={locale} />
 
         <AutomationSection locale={locale} t={t.automation} isDarkMode={isDarkMode} />
+
+        {/* Interactive flow builder: connect 1 → 2 → 3 to open the contact form */}
+        <section id="flow-demo" className={`py-20 px-4 relative z-20 ${isDarkMode ? 'bg-gray-800/50' : 'bg-gray-100/50'}`}>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-10">
+              <span className="inline-block px-4 py-2 rounded-full bg-green-500/15 border border-green-500/40 text-green-500 text-sm font-medium mb-6">
+                {t.flowGame.eyebrow}
+              </span>
+              <h2 className={sectionTitle.replace('mb-12', 'mb-4')}>{t.flowGame.title}</h2>
+              <p className={`text-lg max-w-3xl mx-auto leading-relaxed mb-3 ${body}`}>{t.flowGame.intro}</p>
+              <p className={`text-sm max-w-3xl mx-auto ${muted}`}>{t.flowGame.howTo}</p>
+            </div>
+            <FlowPlayground locale={locale} t={t.flowGame} formT={t.contact.form} isDarkMode={isDarkMode} />
+          </div>
+        </section>
 
         {/* Skills */}
         <section className={`py-20 px-4 relative z-20 ${isDarkMode ? 'bg-gray-800/50' : 'bg-gray-100/50'}`}>
